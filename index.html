@@ -2,545 +2,638 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kyla’s 24th Birthday Workation — Vietnam 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Vietnam 2026 — Kyla’s Birthday Workation</title>
   <style>
     :root {
       --bg: #fff8fb;
       --bg-2: #f4fbff;
-      --ink: #3e3340;
-      --muted: #736675;
-      --pink: #ffc7dd;
-      --pink-2: #ffe7f0;
-      --peach: #ffdfc7;
-      --mint: #c9f2df;
-      --sky: #cbe9ff;
-      --lav: #ded2ff;
-      --yellow: #fff0b8;
-      --card: rgba(255,255,255,.9);
-      --line: rgba(96, 69, 95, .16);
-      --shadow: 0 12px 26px rgba(112, 78, 106, .13);
-      --radius: 22px;
-      --radius-sm: 15px;
-      --max: 1180px;
-      --bottom-nav-height: 82px;
+      --ink: #332a35;
+      --muted: #6f6470;
+      --pink: #ffc4dc;
+      --pink-2: #ffe8f1;
+      --peach: #ffe0c8;
+      --mint: #cdf4df;
+      --sky: #d8efff;
+      --lav: #e2d7ff;
+      --yellow: #fff1b8;
+      --card: rgba(255, 255, 255, .94);
+      --line: rgba(72, 51, 75, .14);
+      --shadow: 0 8px 22px rgba(99, 70, 96, .12);
+      --radius: 18px;
+      --radius-sm: 13px;
+      --bottom-nav-height: 74px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    * { box-sizing: border-box; max-width: 100%; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       color: var(--ink);
-      font: 16px/1.58 ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system, sans-serif;
+      font: 15px/1.42 ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system, sans-serif;
       background:
-        radial-gradient(circle at 8% 0%, rgba(255,199,221,.55), transparent 23rem),
-        radial-gradient(circle at 96% 7%, rgba(203,233,255,.72), transparent 24rem),
-        radial-gradient(circle at 50% 105%, rgba(201,242,223,.65), transparent 24rem),
+        radial-gradient(circle at 0% 0%, rgba(255, 196, 220, .50), transparent 18rem),
+        radial-gradient(circle at 100% 7%, rgba(216, 239, 255, .70), transparent 18rem),
         linear-gradient(135deg, var(--bg), var(--bg-2));
-      min-height: 100vh;
-      overflow-x: hidden;
-      padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
-      word-wrap: break-word;
+      min-height: 100svh;
+      padding-bottom: calc(80px + env(safe-area-inset-bottom));
+      overflow-wrap: anywhere;
     }
 
     button, input { font: inherit; }
     button { -webkit-tap-highlight-color: transparent; }
-    a { color: #8d3f69; overflow-wrap: anywhere; }
-    p, li, td, th, h1, h2, h3, span, div { overflow-wrap: anywhere; }
-    .shell { width: min(100%, var(--max)); margin: 0 auto; padding: 12px; }
+    a { color: #8c3e68; overflow-wrap: anywhere; }
+    p, ul { margin: 8px 0 0; }
+    h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: -.02em; }
+    h1 { font-size: clamp(22px, 7vw, 26px); }
+    h2 { font-size: clamp(18px, 5.5vw, 22px); }
+    h3 { font-size: clamp(17px, 4.8vw, 20px); }
+    ul { padding-left: 1.15rem; }
+
+    .app { width: 100%; max-width: 980px; margin: 0 auto; padding: 10px 10px 0; }
     .hero {
       position: relative;
-      overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 22px 16px;
-      background: linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,231,240,.9));
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: var(--shadow);
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: start;
+    }
+    .subtitle { color: var(--muted); font-size: 13px; font-weight: 750; margin-top: 3px; }
+    .route { color: var(--muted); font-size: 12px; font-weight: 800; margin-top: 6px; }
+    .intro { display: none; }
+
+    .tools { position: relative; }
+    .tools summary {
+      list-style: none;
+      cursor: pointer;
+      min-height: 36px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--pink-2);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+    .tools summary::-webkit-details-marker { display: none; }
+    .tools[open] .tools-menu { display: grid; }
+    .tools-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 6px);
+      z-index: 45;
+      min-width: 190px;
+      padding: 8px;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
       box-shadow: var(--shadow);
     }
-    .hero:after {
-      content: "✈️ 🌸 🧳 📸 🍜";
-      position: absolute;
-      right: 12px;
-      bottom: 8px;
-      font-size: clamp(28px, 12vw, 64px);
-      opacity: .13;
-      letter-spacing: .04em;
-      pointer-events: none;
-    }
-    .eyebrow, .top-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-    .eyebrow { margin-bottom: 12px; }
-    .pill {
-      display: inline-flex;
-      align-items: center;
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 6px;
+      margin: 8px 0;
+    }
+    .btn, .copy-btn, .top-btn {
+      min-height: 38px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(255,255,255,.76);
-      padding: 7px 11px;
-      color: var(--muted);
-      font-weight: 800;
-      font-size: 13px;
-      max-width: 100%;
-    }
-    h1, h2, h3 { line-height: 1.14; margin: 0; }
-    h1 { max-width: 760px; font-size: clamp(34px, 11vw, 70px); letter-spacing: -.05em; }
-    .subtitle { max-width: 760px; margin: 14px 0 0; color: var(--muted); font-size: clamp(16px, 4vw, 20px); }
-    .top-actions { margin-top: 20px; }
-    .action-btn, .tab-btn, .copy-btn, .back-to-top {
-      border: 0;
-      border-radius: 999px;
+      background: white;
+      color: var(--ink);
       cursor: pointer;
       font-weight: 900;
-      color: var(--ink);
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
-      min-height: 44px;
+      padding: 8px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
     }
-    .action-btn { padding: 11px 15px; background: var(--ink); color: white; box-shadow: 0 10px 20px rgba(62,51,64,.17); }
-    .action-btn.secondary { background: white; color: var(--ink); border: 1px solid var(--line); }
-    .action-btn:hover, .tab-btn:hover, .copy-btn:hover, .back-to-top:hover { transform: translateY(-1px); }
+    .btn.primary { background: var(--ink); color: white; }
+    .btn.pink { background: linear-gradient(135deg, var(--pink), var(--lav)); }
+    .quick-actions .btn { min-height: 34px; padding: 7px 6px; font-size: 12px; }
 
-    .toolbar {
+    .search-shell {
       position: sticky;
       top: 0;
-      z-index: 30;
-      margin: 14px 0;
-      padding: 10px;
+      z-index: 35;
+      margin: 8px -2px 10px;
+      padding: 6px;
       border: 1px solid var(--line);
-      border-radius: 22px;
-      background: rgba(255,255,255,.9);
-      box-shadow: 0 10px 26px rgba(112,78,106,.10);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 8px 20px rgba(99, 70, 96, .10);
       backdrop-filter: blur(12px);
     }
-    .search-row { display: grid; grid-template-columns: 1fr; gap: 8px; }
-    .search-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .search-row { display: grid; grid-template-columns: 1fr auto; gap: 6px; }
     #searchInput {
       width: 100%;
+      min-height: 38px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 14px 16px;
-      background: white;
+      background: #fff;
+      padding: 8px 12px;
       outline: none;
-      font-size: 16px;
+      font-size: 14px;
     }
-    #searchInput:focus { border-color: #ff8fbd; box-shadow: 0 0 0 4px rgba(255,199,221,.45); }
-    .tabs {
+    #searchInput:focus { border-color: #ff88b7; box-shadow: 0 0 0 3px rgba(255, 196, 220, .38); }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .stack { display: grid; gap: 10px; }
+    .section-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 12px 0 8px; }
+    .card, .day-card, .photo-card, .expense-card, .contact-card {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 13px;
+    }
+    .compact-card { padding: 12px; }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      margin: 3px 4px 0 0;
+      border-radius: 999px;
+      background: var(--sky);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .tag.done { background: var(--mint); }
+    .tag.todo { background: var(--yellow); }
+    .tag.cash { background: var(--peach); }
+
+    details.accordion, details.day-card, details.photo-card { padding: 0; overflow: hidden; }
+    summary.acc-summary, summary.day-summary, summary.photo-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 13px;
+      display: grid;
+      gap: 5px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .summary-main { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .chev { flex: 0 0 auto; width: 28px; height: 28px; border-radius: 999px; background: var(--pink-2); display: grid; place-items: center; font-weight: 900; }
+    details[open] .chev { transform: rotate(180deg); }
+    .acc-body, .day-body, .photo-body { padding: 0 13px 13px; }
+
+    .checklist { display: grid; gap: 7px; }
+    .check-item {
+      min-height: 40px;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, .72);
+    }
+    .check-item input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 1px; accent-color: #ff86b8; }
+    .check-item.done span { color: var(--muted); text-decoration: line-through; }
+
+    .dashboard-grid { display: grid; gap: 10px; }
+    .task-list { display: grid; gap: 7px; margin-top: 8px; }
+    .task-row { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: start; }
+    .dot { width: 9px; height: 9px; margin-top: 6px; border-radius: 999px; background: #ff86b8; }
+    .time-block {
+      display: grid;
+      gap: 3px;
+      padding: 9px 0 9px 13px;
+      border-left: 3px solid var(--pink);
+      border-top: 1px dashed var(--line);
+    }
+    .time { font-weight: 950; color: #944f72; }
+    .priority {
+      margin: 8px 0;
+      padding: 9px 10px;
+      border: 1px dashed rgba(148, 79, 114, .35);
+      border-radius: 14px;
+      background: rgba(255, 241, 184, .52);
+      font-weight: 850;
+    }
+
+    .mobile-cards { display: grid; gap: 10px; }
+    .table-wrap { display: none; }
+    .meta-grid { display: grid; gap: 6px; margin-top: 8px; }
+    .meta-row { display: grid; grid-template-columns: 94px 1fr; gap: 8px; }
+    .copy-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: start; padding: 7px 0; border-bottom: 1px dashed var(--line); }
+    .copy-row:last-child { border-bottom: 0; }
+    .copy-btn { min-height: 32px; padding: 6px 9px; font-size: 12px; background: var(--sky); }
+    .phone { font-weight: 950; text-decoration: none; }
+
+    .placeholder-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 8px; }
+    .placeholder {
+      min-height: 72px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 10px;
+      border: 2px dashed rgba(148, 79, 114, .35);
+      border-radius: 15px;
+      background: rgba(255, 232, 241, .44);
+      color: var(--muted);
+      font-weight: 900;
+    }
+    .photo-columns { display: grid; gap: 10px; }
+
+    .bottom-nav {
       position: fixed;
       left: 0;
       right: 0;
       bottom: 0;
       z-index: 50;
       display: flex;
-      gap: 8px;
+      gap: 7px;
       overflow-x: auto;
       overscroll-behavior-x: contain;
-      padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
-      background: rgba(255,255,255,.94);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      min-height: var(--bottom-nav-height);
+      background: rgba(255, 255, 255, .96);
       border-top: 1px solid var(--line);
-      box-shadow: 0 -12px 30px rgba(112,78,106,.16);
+      box-shadow: 0 -10px 24px rgba(99, 70, 96, .15);
       scrollbar-width: none;
     }
-    .tabs::-webkit-scrollbar { display: none; }
-    .tab-btn { flex: 0 0 auto; padding: 11px 15px; background: var(--pink-2); border: 1px solid transparent; white-space: nowrap; }
-    .tab-btn[aria-selected="true"] { background: linear-gradient(135deg, var(--pink), var(--lav)); border-color: rgba(62,51,64,.12); box-shadow: 0 8px 18px rgba(255,143,189,.25); }
-
-    .tab-panel { display: none; animation: fade .22s ease; }
-    .tab-panel.active { display: block; }
-    @keyframes fade { from { opacity: .5; transform: translateY(4px);} to {opacity: 1; transform: none;} }
-
-    .grid, .kpi { display: grid; grid-template-columns: 1fr; gap: 14px; }
-    .card, .day-card, .section-card, .expense-card, .photo-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--card);
-      box-shadow: var(--shadow);
-      padding: 15px;
-      min-width: 0;
-    }
-    .card h3, .section-card h2, .day-card h2 { margin-bottom: 10px; }
-    .section-title { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin: 18px 0 12px; }
-    .section-title h2 { font-size: clamp(23px, 7vw, 34px); letter-spacing: -.03em; }
-    .kpi { margin: 16px 0; }
-    .kpi .card { padding: 15px; background: linear-gradient(135deg, white, var(--pink-2)); }
-    .kpi strong { display: block; font-size: 22px; }
-    .muted { color: var(--muted); }
-    .small { font-size: 13px; }
-    .tag { display: inline-flex; border-radius: 999px; padding: 4px 9px; font-size: 12px; font-weight: 900; margin: 3px 4px 3px 0; background: var(--sky); }
-    .tag.paid { background: var(--mint); }
-    .tag.due { background: var(--yellow); }
-    .tag.cash { background: var(--peach); }
-    .tag.booked { background: var(--lav); }
-
-    details.day-card, details.photo-card { padding: 0; overflow: hidden; }
-    .day-summary, .photo-summary {
-      list-style: none;
+    .bottom-nav::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      flex: 0 0 72px;
+      min-height: 50px;
+      border: 1px solid transparent;
+      border-radius: 17px;
+      background: var(--pink-2);
+      color: var(--ink);
       cursor: pointer;
-      padding: 15px;
-      display: grid;
-      gap: 8px;
-      min-height: 58px;
-    }
-    .day-summary::-webkit-details-marker, .photo-summary::-webkit-details-marker { display: none; }
-    .summary-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .chevron { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 999px; display: grid; place-items: center; background: var(--pink-2); font-weight: 900; }
-    details[open] .chevron { transform: rotate(180deg); }
-    .day-body, .photo-body { padding: 0 15px 15px; }
-    .photo-priority {
-      border: 1px dashed rgba(156,81,117,.35);
-      border-radius: 16px;
-      padding: 10px 12px;
-      background: rgba(255,240,184,.48);
-      font-weight: 800;
-    }
-    .time-block {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 3px;
-      padding: 12px 0 12px 16px;
-      border-left: 3px solid var(--pink);
-      border-top: 1px dashed var(--line);
-      position: relative;
-    }
-    .time-block:before { content: ""; position: absolute; left: -7px; top: 18px; width: 10px; height: 10px; border-radius: 999px; background: #ff8fbd; border: 2px solid white; }
-    .time { font-weight: 900; color: #9c5175; }
-    .reminder {
-      margin-top: 14px;
-      border: 1px dashed rgba(156,81,117,.35);
-      border-radius: 18px;
-      padding: 14px;
-      background: linear-gradient(135deg, rgba(255,231,240,.8), rgba(255,240,184,.55));
-    }
-    ul.clean { padding-left: 1.15rem; margin: 8px 0 0; }
-    .checklist { display: grid; gap: 8px; }
-    .check-item {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      padding: 11px 12px;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: rgba(255,255,255,.72);
-      min-height: 44px;
-    }
-    .check-item input { width: 20px; height: 20px; margin-top: 2px; accent-color: #ff8fbd; flex: 0 0 auto; }
-    .check-item.done span { color: var(--muted); text-decoration: line-through; }
-
-    .table-wrap { display: none; overflow-x: auto; border-radius: 18px; border: 1px solid var(--line); background: white; }
-    table { width: 100%; border-collapse: collapse; min-width: 0; }
-    th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-    th { background: var(--pink-2); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
-    tr:last-child td { border-bottom: 0; }
-    .expense-cards { display: grid; gap: 12px; }
-    .expense-card { padding: 14px; }
-    .expense-meta { display: grid; gap: 7px; margin-top: 9px; }
-    .expense-meta div { display: grid; grid-template-columns: 88px 1fr; gap: 8px; }
-    .contact-line { display: grid; gap: 6px; }
-    .copy-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
-    .copy-row:last-child { border-bottom: 0; }
-    .copy-text { min-width: 0; }
-    .copy-btn { flex: 0 0 auto; min-height: 36px; padding: 7px 10px; background: var(--sky); border: 1px solid var(--line); font-size: 12px; }
-    .phone-link { font-weight: 900; text-decoration: none; }
-    .hidden-by-search { display: none !important; }
-    .empty-state { display: none; margin: 22px 0; padding: 22px; text-align: center; border: 1px dashed var(--line); border-radius: var(--radius); background: rgba(255,255,255,.75); }
-    .empty-state.show { display: block; }
-    .placeholder-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
-    .reference-placeholder {
-      min-height: 96px;
-      border: 2px dashed rgba(156,81,117,.32);
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,231,240,.56));
+      font-size: 11px;
+      font-weight: 950;
       display: grid;
       place-items: center;
+      gap: 1px;
+      padding: 6px;
       text-align: center;
-      color: var(--muted);
-      font-weight: 900;
-      padding: 12px;
     }
-    .photo-columns { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; }
-    .shot-checklist { margin-bottom: 16px; }
+    .nav-btn .icon { font-size: 18px; line-height: 1; }
+    .nav-btn[aria-selected="true"] { background: linear-gradient(135deg, var(--pink), var(--lav)); border-color: rgba(72, 51, 75, .14); }
+
     .back-to-top {
       position: fixed;
-      right: 14px;
-      bottom: calc(var(--bottom-nav-height) + 14px + env(safe-area-inset-bottom, 0px));
+      right: 12px;
+      bottom: calc(var(--bottom-nav-height) + 12px + env(safe-area-inset-bottom));
       z-index: 55;
-      padding: 10px 13px;
-      background: var(--ink);
-      color: white;
-      box-shadow: 0 10px 24px rgba(62,51,64,.24);
       opacity: 0;
       pointer-events: none;
+      min-height: 38px;
+      padding: 8px 11px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+      box-shadow: 0 8px 20px rgba(51, 42, 53, .25);
+      font-weight: 950;
+      cursor: pointer;
     }
     .back-to-top.show { opacity: 1; pointer-events: auto; }
+    .hidden-by-search { display: none !important; }
+    .empty { display: none; text-align: center; margin: 12px 0; }
+    .empty.show { display: block; }
 
-    @media (min-width: 700px) {
-      body { padding-bottom: 0; }
-      .shell { padding: 22px; }
-      .hero { border-radius: 34px; padding: clamp(22px, 4vw, 42px); }
-      .search-row { grid-template-columns: 1fr auto; align-items: center; }
-      .search-actions { display: flex; }
-      .tabs { position: static; padding: 10px 0 0; background: transparent; border-top: 0; box-shadow: none; scrollbar-width: thin; }
-      .tabs::-webkit-scrollbar { display: initial; }
-      .grid.two, .kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (min-width: 768px) {
+      body { padding-bottom: 0; font-size: 16px; }
+      .app { padding: 18px; }
+      .hero { padding: 18px; }
+      h1 { font-size: 38px; }
+      .intro { display: block; color: var(--muted); max-width: 760px; }
+      .dashboard-grid, .two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .three-col { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .quick-actions { max-width: 560px; }
+      .bottom-nav { position: static; min-height: auto; padding: 10px 0 0; background: transparent; border-top: 0; box-shadow: none; }
+      .nav-btn { flex-basis: auto; min-width: 86px; }
+      .table-wrap { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: white; }
+      .table-wrap table { width: 100%; border-collapse: collapse; }
+      .table-wrap th, .table-wrap td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      .table-wrap th { background: var(--pink-2); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+      .mobile-cards.desktop-hidden { display: none; }
       .photo-columns, .placeholder-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .time-block { grid-template-columns: 140px 1fr; padding-left: 18px; }
-      .table-wrap { display: block; }
-      .expense-cards { display: none; }
-      .back-to-top { bottom: 18px; }
-    }
-
-    @media (min-width: 980px) {
-      .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .kpi { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .time-block { grid-template-columns: 120px 1fr; }
+      .back-to-top { bottom: 16px; }
     }
 
     @media print {
-      body { background: white; color: #222; font-size: 11.5pt; padding-bottom: 0; }
-      .shell { max-width: none; padding: 0; }
-      .toolbar, .top-actions, .empty-state, .back-to-top, .copy-btn { display: none !important; }
-      .hero, .card, .day-card, .section-card, .expense-card, .photo-card { box-shadow: none; break-inside: avoid; border-color: #ddd; background: white; }
-      .hero { padding: 18px; margin-bottom: 12px; }
-      .hero:after { display: none; }
-      .tab-panel { display: block !important; page-break-before: always; }
-      .tab-panel:first-of-type { page-break-before: auto; }
-      details.day-card, details.photo-card { display: block; }
-      details.day-card > summary, details.photo-card > summary { display: block; }
-      details.day-card:not([open]) .day-body, details.photo-card:not([open]) .photo-body { display: block; }
-      .section-title { margin-top: 12px; }
-      .grid.two, .grid.three, .kpi { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      a { color: inherit; text-decoration: none; }
-      .table-wrap { display: block; }
-      .expense-cards { display: none; }
-      table { min-width: 0; font-size: 9.5pt; }
-      th, td { padding: 7px; }
+      body { background: white; padding: 0; color: #222; }
+      .search-shell, .bottom-nav, .tools, .back-to-top, .copy-btn, .empty { display: none !important; }
+      .app { max-width: none; padding: 0; }
+      .hero, .card, .day-card, .photo-card, .expense-card, .contact-card { box-shadow: none; background: white; break-inside: avoid; }
+      .panel { display: block !important; page-break-before: always; }
+      .panel:first-of-type { page-break-before: auto; }
+      details:not([open]) > div { display: block; }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <header class="hero searchable" data-search-label="Project title overview Kyla birthday Vietnam workation trip">
-      <div class="eyebrow">
-        <span class="pill">🌸 Vietnam 2026</span>
-        <span class="pill">🎂 Birthday trip</span>
-        <span class="pill">💻 Private workation planner</span>
-        <span class="pill">🖨️ Print/PDF ready</span>
+  <div class="app" id="top">
+    <header class="hero searchable" data-search-label="Vietnam 2026 Kyla Birthday Workation Jun 10 18 SGN Sapa Hanoi Mui Ne">
+      <div>
+        <h1>Vietnam 2026 🇻🇳</h1>
+        <div class="subtitle">Kyla’s Birthday Workation</div>
+        <div class="route">Jun 10–18 • SGN → Sapa → Hanoi → Mui Ne</div>
+        <p class="intro">Offline phone-first dashboard for flights, hotels, immigration, daily plans, contacts, photo references, shopping, and final confirmations.</p>
       </div>
-      <h1>Kyla’s 24th Birthday Workation — Vietnam 2026</h1>
-      <p class="subtitle">A fully offline travel planner dashboard for Kyla Nicole Rabi and James Benedict Santos, June 10–18, 2026: Ho Chi Minh City, Sapa, Hanoi, and Mui Ne.</p>
-      <div class="top-actions">
-        <button class="action-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
-        <button class="action-btn secondary" id="currentDayHero">📍 Today / current day</button>
-        <button class="action-btn secondary" id="resetChecks">↺ Reset saved checkboxes</button>
-      </div>
+      <details class="tools">
+        <summary>Tools</summary>
+        <div class="tools-menu">
+          <button class="btn" type="button" onclick="window.print()">Print / PDF</button>
+          <button class="btn" type="button" id="resetChecks">Reset checks</button>
+        </div>
+      </details>
     </header>
 
-    <nav class="toolbar" aria-label="Planner navigation">
-      <div class="search-row">
-        <input id="searchInput" type="search" placeholder="🔎 Search all tabs: flight, hotel, outfit, cash, booking ID..." aria-label="Search all content" />
-        <div class="search-actions">
-          <button class="action-btn secondary" id="currentDayBtn">📍 Today</button>
-          <button class="action-btn secondary" id="clearSearch">Clear</button>
-        </div>
-      </div>
-      <div class="tabs" id="tabs" role="tablist"></div>
-    </nav>
+    <div class="quick-actions" aria-label="Quick actions">
+      <button class="btn pink" type="button" data-go="itinerary" data-current-day="true">Today</button>
+      <button class="btn" type="button" id="focusSearch">Search</button>
+      <button class="btn" type="button" data-go="immigration">Immigration</button>
+      <button class="btn" type="button" data-go="contacts">Contacts</button>
+    </div>
 
-    <main id="app"></main>
-    <button class="back-to-top" id="backToTop" type="button">↑ Top</button>
-    <div class="empty-state" id="emptyState">No matching cards found. Try searching a city, date, booking code, or activity. 💗</div>
+    <div class="search-shell">
+      <div class="search-row">
+        <input id="searchInput" type="search" placeholder="Search plans, contacts, bookings…" aria-label="Search all planner content" />
+        <button class="btn" type="button" id="clearSearch">Clear</button>
+      </div>
+    </div>
+
+    <main id="content"></main>
+    <p class="empty card" id="emptyState">No matching cards found. Try a city, date, hotel, activity, booking code, or contact.</p>
   </div>
+
+  <nav class="bottom-nav" id="bottomNav" aria-label="Bottom navigation"></nav>
+  <button class="back-to-top" id="backToTop" type="button">↑ Top</button>
 
   <script>
     const trip = {
-      title: "Kyla’s 24th Birthday Workation — Vietnam 2026",
-      travelers: ["Kyla Nicole Rabi", "James Benedict Santos"],
-      dates: "June 10–18, 2026",
-      purpose: "Tourism / birthday trip",
-      cities: "Vietnam — Ho Chi Minh City, Sapa, Hanoi, Mui Ne",
-      workShift: "2:30 AM–10:00 AM Vietnam time / 3:30 AM–11:00 AM Philippine time",
+      nextTasks: [
+        "Complete pre-arrival form",
+        "Confirm internet backup",
+        "Confirm luggage storage",
+        "Confirm Mui Ne return car",
+        "Check Train Street schedule on Jun 15 morning"
+      ],
+      overview: [
+        ["Travelers", "Kyla Nicole Rabi + James Benedict Santos"],
+        ["Dates", "June 10–18, 2026"],
+        ["Work shift", "2:30 AM–10:00 AM Vietnam time / 3:30 AM–11:00 AM Philippine time"],
+        ["Route", "Ho Chi Minh City → Sapa → Hanoi → Mui Ne → Ho Chi Minh City"]
+      ],
       flights: [
-        { airline: "Cebu Pacific", flight: "5J751", route: "MNL to SGN", depart: "June 10, 2026, 10:10 PM — Manila NAIA Terminal 3", arrive: "June 11, 2026, 12:05 AM — Ho Chi Minh / Tan Son Nhat Terminal 2", baggage: "Kyla 20kg checked + 7kg carry-on; James 20kg checked + 7kg carry-on" },
-        { airline: "VietJet", flight: "VJ142", route: "SGN to HAN", depart: "June 12, 2026, 1:20 PM — Tan Son Nhat Domestic Terminal 1", arrive: "June 12, 2026, 3:30 PM — Hanoi / Noi Bai", baggage: "Kyla 20kg checked + 7kg carry-on; James 7kg carry-on" },
-        { airline: "VietJet", flight: "VJ167", route: "HAN to SGN", depart: "June 15, 2026, 10:45 PM — Hanoi / Noi Bai", arrive: "June 16, 2026, 12:55 AM — Ho Chi Minh / Tan Son Nhat Domestic Terminal 1", booking: "7VQ677", baggage: "Kyla 20kg checked + 7kg carry-on; James 7kg carry-on", note: "VietJet email reconfirmed this flight number and time." },
-        { airline: "Cebu Pacific", flight: "5J754", route: "SGN to MNL", depart: "June 17, 2026, 9:50 PM — Ho Chi Minh / Tan Son Nhat Terminal 2", arrive: "June 18, 2026, 1:45 AM — Manila NAIA Terminal 3", baggage: "Kyla 40kg checked + 7kg carry-on; James 20kg checked + 7kg carry-on" }
+        { item: "5J751 Manila → Ho Chi Minh", date: "Jun 10, 10:10 PM → Jun 11, 12:05 AM", notes: "Cebu Pacific. NAIA T3 to Tan Son Nhat T2. Kyla 20kg checked + 7kg carry-on; James 20kg checked + 7kg carry-on." },
+        { item: "VJ142 Ho Chi Minh → Hanoi", date: "Jun 12, 1:20 PM → 3:30 PM", notes: "Tan Son Nhat Domestic T1 to Noi Bai. Kyla 20kg checked + 7kg carry-on; James 7kg carry-on." },
+        { item: "VJ167 Hanoi → Ho Chi Minh", date: "Jun 15, 10:45 PM → Jun 16, 12:55 AM", notes: "Booking 7VQ677. VietJet reconfirmed flight number/time. Kyla 20kg checked + 7kg carry-on; James 7kg carry-on." },
+        { item: "5J754 Ho Chi Minh → Manila", date: "Jun 17, 9:50 PM → Jun 18, 1:45 AM", notes: "Cebu Pacific. Tan Son Nhat T2 to NAIA T3. Kyla 40kg checked + 7kg carry-on; James 20kg checked + 7kg carry-on." }
       ],
       hotels: [
-        { name: "Felix Hotel Saigon", address: "219/8A Phạm Ngũ Lão, District 1, Ho Chi Minh City", stay: "June 10–12, 2026", checkin: "June 10, 2:00 PM", checkout: "June 12, 12:00 PM", contact: "+84 868 036 299", notes: "Wi‑Fi okay, desk in room, luggage storage until 11 PM same checkout day.", breakfast: "Not confirmed" },
-        { name: "Sapa CatCat Hills Resort & Spa", address: "86 Fansipan, Sapa, Lao Cai, Vietnam", stay: "June 12–14, 2026", checkin: "June 12, 2:00 PM", checkout: "June 14, 12:00 PM", contact: "+84 2143 779 789", whatsapp: "+84 819 268 668", notes: "24/7 reception, late check-in okay, Wi‑Fi okay for calls, luggage storage after checkout available.", breakfast: "Included" },
-        { name: "Royal Holiday Hanoi Hotel", address: "19 Hàng Hành, Hoan Kiem District, Hanoi", stay: "June 14–15, 2026", checkin: "June 14, 2:00 PM", checkout: "June 15, 12:00 PM", booking: "1726590471", reference: "17710", contact: "+84 243 938 0433", whatsapp: "+84 946 883 179", manager: "+84 946 489 179", notes: "Room will be kept for early arrival, luggage storage after checkout available.", breakfast: "Included" },
-        { name: "Anket De’ River Mũi Né Resort", address: "50 Huỳnh Thúc Kháng, Phường Mũi Né, Phan Thiết, Vietnam", stay: "June 16–17, 2026", checkin: "June 16, 3:00 PM", checkout: "June 17, 12:00 PM", booking: "1726593044", contact: "+84 922 192 929", notes: "Birthday note sent, early check-in requested, late checkout requested, lower floor/view request sent.", breakfast: "Included" }
+        { name: "Felix Hotel Saigon", stay: "Jun 10–12", address: "219/8A Phạm Ngũ Lão, District 1, Ho Chi Minh City", phone: "+84 868 036 299", notes: "Wi‑Fi okay, desk in room, luggage storage until 11 PM same checkout day." },
+        { name: "Sapa CatCat Hills Resort & Spa", stay: "Jun 12–14", address: "86 Fansipan, Sapa, Lao Cai, Vietnam", phone: "+84 2143 779 789", whatsapp: "+84 819 268 668", notes: "24/7 reception, late check-in okay, Wi‑Fi okay for calls, luggage storage after checkout available. Breakfast included." },
+        { name: "Royal Holiday Hanoi Hotel", stay: "Jun 14–15", address: "19 Hàng Hành, Hoan Kiem District, Hanoi", phone: "+84 243 938 0433", whatsapp: "+84 946 883 179", notes: "Booking 1726590471 / Ref 17710. Room kept for early arrival, luggage storage after checkout available. Breakfast included." },
+        { name: "Anket De’ River Mũi Né Resort", stay: "Jun 16–17", address: "50 Huỳnh Thúc Kháng, Phường Mũi Né, Phan Thiết", phone: "+84 922 192 929", notes: "Booking 1726593044. Birthday note sent. Confirm luggage and return car details." }
       ],
-      bookings: [
-        { name: "G8 Open Tour Cabin Sleeper Bus", icon: "🚌", details: ["Route: Noi Bai Airport to Sapa", "Date/time: June 12, 2026, 5:45 PM", "Pickup: Noi Bai Domestic Terminal, Floor 1, Gate E1", "Drop-off: Sapa / hotel shuttle", "Booking reference: KBP240013", "Contact: +84 382 995 611 / +84 358 482 611", "Cabins: 1 upper single cabin + 1 lower single cabin", "Includes: USB sockets, Wi‑Fi onboard, blanket"] },
-        { name: "HK Buslines 24-Cabin Sleeping Bus", icon: "🌙", details: ["Route: Sapa to Hanoi Old Quarter", "Date/time: June 14, 2026, 10:00 PM", "Pickup: Sapa CatCat Hills Resort & Spa", "Drop-off: Hanoi Old Quarter / Royal Holiday Hanoi Hotel area", "Cabins: 2 lower single cabins", "Booking reference: to be added later"] },
-        { name: "Ho Chi Minh City Motorbike Street Food Tour", icon: "🍜", details: ["Date: June 11, 2026 evening", "Pickup/drop-off: Felix Hotel", "Dietary note: no raw food, no exotic food, no extremely spicy food", "Booking reference: to be added later"] },
-        { name: "4RAU Barber Deluxe", icon: "💈", details: ["Date: June 11, 2026", "Target time: around 12:30 PM–1:00 PM", "Address: 59 Đồng Du, Bến Nghé, District 1, Ho Chi Minh City", "Package: Combo 1 — Haircut + Shampoo + Pomade Styling + Blowdry", "Instruction: Korean soft two-block with curtain fringe; stylist may adjust. Please teach quick styling.", "Booking reference: to be added later"] },
-        { name: "Vietnam Car Service / Mui Ne Jeep Tour", icon: "🚙", details: ["Contact: +84 93 302 18 39", "Line ID: vietnamcarservice", "HCMC Airport to Mui Ne private car: June 16 after 12:55 AM arrival, pickup around 1:30–2:00 AM", "Mui Ne to SGN Terminal 2 private car: June 17, pickup 2:30 PM", "Recommended vehicle: 7-seater because only 100,000 VND more than 4-seater", "Mui Ne Private Jeep Sunset Tour: June 16, 2:00 PM–6:00 PM", "Price: 600,000 VND for 2 people private jeep", "Includes: private jeep, driver, gasoline, parking fees", "Excludes: ATV/jeep inside White Sand Dunes, paid onsite", "Route: skip Fairy Stream; focus on White Sand Dunes, ATV, yellow truck/photo road, Red Sand Dunes, beach road, Fishing Village if time allows"] }
+      days: [
+        { date: "June 10", title: "Departure from Manila", short: "Fly to Ho Chi Minh City", priorities: "Airport outfit, document flatlay, luggage clips", plan: [["Evening", "Arrive at NAIA Terminal 3 early, eat, prepare immigration documents, and board Cebu Pacific 5J751."], ["10:10 PM", "Depart Manila for Ho Chi Minh City."]] },
+        { date: "June 11", title: "Saigon reset + shopping + food tour", short: "Useful first-day dashboard: form, SIM/internet, haircut, food", priorities: "shopping haul, BF haircut, food tour, Saigon night", plan: [["12:05 AM", "Arrive SGN, clear immigration, go to Felix Hotel Saigon."], ["Morning", "Work shift / recovery. Confirm luggage storage and internet backup."], ["After work", "Shopping haul, BF haircut glow-up, coffee/snacks, and District 1 walk."], ["Night", "Food tour and Saigon night shots."]] },
+        { date: "June 12", title: "Fly to Hanoi + transfer to Sapa", short: "Checkout Saigon, VJ142, road to Sapa", priorities: "Airport clips, Sapa arrival, resort room reveal", plan: [["Morning", "Work, breakfast/coffee, pack, checkout Felix Hotel."], ["1:20 PM", "Fly SGN to HAN on VietJet VJ142."], ["Afternoon/Evening", "Private transfer or bus to Sapa; late check-in at CatCat Hills Resort."]] },
+        { date: "June 13", title: "Cat Cat Village day", short: "Costume, rainbow slide, village shots", priorities: "Cat Cat costume, rainbow slide, village shots", plan: [["Morning", "Breakfast, rent/prepare costume, walk to Cat Cat Village."], ["Midday", "Shoot village paths, waterfall, local details, wide mountain backdrops."], ["Afternoon", "Rainbow slide if available; café/rest stop."], ["Night", "Dinner and backup photos/videos."]] },
+        { date: "June 14", title: "Sapa mountain + Hanoi transfer", short: "Mountain photos, Moana/Glass Bridge if possible", priorities: "Sapa mountain shots, Green Valley/Rainbow Bridge, Moana/Glass Bridge if possible", plan: [["Morning", "Checkout, leave luggage, shoot Sapa mountain views."], ["Midday", "Green Valley/Rainbow Bridge. Add Moana/Glass Bridge only if timing/weather works."], ["Afternoon/Evening", "Transfer to Hanoi, check in Royal Holiday Hanoi Hotel."]] },
+        { date: "June 15", title: "Ba Vi + Train Street + night flight", short: "Cinematic shoot, Train Street, VJ167", priorities: "Ba Vi cinematic shoot, Train Street", plan: [["Morning", "Check Train Street schedule before committing; confirm luggage storage after checkout."], ["Day", "Ba Vi cinematic shoot with nature, road, and couple clips."], ["Evening", "Train Street if schedule is safe/confirmed; dinner near Old Quarter."], ["10:45 PM", "Fly Hanoi to Ho Chi Minh City on VietJet VJ167."]] },
+        { date: "June 16", title: "Mui Ne birthday resort + dunes", short: "Birthday resort, ATV/jeep sunset", priorities: "birthday resort, dunes, ATV/jeep sunset", plan: [["Early AM", "Arrive SGN, transfer/rest as planned; prepare for Mui Ne car."], ["Day", "Travel to Anket De’ River Mui Ne Resort, check in, birthday resort shots."], ["Sunset", "Dunes, ATV/jeep if booked, birthday desert reel."]] },
+        { date: "June 17", title: "Resort slow morning + return flight", short: "Lotte Mart if time, fly home", priorities: "resort slow morning, Lotte Mart haul if time", plan: [["Morning", "Slow resort breakfast, room/pool details, pack."], ["Midday", "Checkout and return car to Ho Chi Minh City."], ["If time", "Lotte Mart/pasalubong haul: coffee, snacks, gifts."], ["9:50 PM", "Fly Ho Chi Minh City to Manila on Cebu Pacific 5J754."]] }
       ],
-      beforeFlight: [
-        { date: "June 8", label: "2 days before flight", items: ["Lay out outfits: airport, Saigon shopping, food tour, Sapa, Cat Cat base outfit, Ba Vi shoot, Mui Ne birthday, bikini, dunes outfit, return outfit", "Test shoes/boots/sandals; pack extra socks", "Prepare beauty/glam kit", "Prepare immigration folder: passport, flights, hotels, Klook vouchers, clean tourist itinerary, proof of funds, HR COE/remote work authorization, boyfriend’s COE/leave approval/company ID, travel insurance", "Screenshot all apps/bookings", "Confirm pocket Wi‑Fi/eSIM/local SIM", "Exchange starter VND if rate is okay", "Confirm G8, HK Buslines, Mui Ne car/jeep, Ba Vi photographer/team, 4RAU barber, luggage storage", "Finalize Google Maps lists"] },
-        { date: "June 9", label: "1 day before flight", items: ["Check Cebu Pacific booking, baggage, terminal, seats, online check-in if available", "Fill Vietnam Pre-Arrival Form for both travelers and save QR codes", "Create phone album: VIETNAM IMMIGRATION + BOOKINGS", "Pack airport bag", "Save Felix Hotel address/contact and screenshot confirmations", "Final luggage weight check"] },
-        { date: "June 10", label: "Flight day checklist", items: ["Target arrival at NAIA Terminal 3 around 6:00–6:30 PM", "Before leaving home: passport, phone, wallet, cards, cash, power bank, laptop, chargers, screenshots, luggage locks", "At NAIA: check-in, bag drop, immigration, security", "Before boarding / before landing HCMC: verify Vietnam Pre-Arrival QR saved", "Arrival-ready info: Felix Hotel address, return flight, hotel booking, clean itinerary, pre-arrival QR"] }
+      immigration: [
+        "Purpose: Tourism / birthday trip.",
+        "Stay: June 10–18, 2026.",
+        "Cities: Ho Chi Minh City, Sapa, Hanoi, Mui Ne.",
+        "Carry printed/screenshot copies of return ticket, hotel bookings, internal flights, travel insurance, workation proof if needed, and emergency contacts.",
+        "Keep answer simple: vacation and birthday trip; remote work only during private hotel hours if asked."
       ],
-      dailyReminder: ["charge phone, laptop, camera, power bank, pocket Wi‑Fi", "prep tomorrow’s clothes", "pack tomorrow’s mini bag", "screenshot tomorrow’s addresses/vouchers", "set alarms", "prep work setup if there is work next morning", "check if breakfast is included tomorrow", "note any transport or schedule confirmation needed"],
-      itinerary: [
-        { date: "June 10", city: "Manila → Ho Chi Minh City", emoji: "✈️", hotel: "Overnight flight / arrival toward Felix Hotel", blocks: [["5:00–6:00 PM", "Final prep at home"], ["6:00–6:30 PM", "Leave for NAIA Terminal 3"], ["6:30–8:30 PM", "Check-in, bag drop, immigration, security"], ["8:30–9:30 PM", "Food/rest, lounge optional"], ["10:10 PM", "Cebu Pacific 5J751 flight MNL to SGN"]] },
-        { date: "June 11", city: "Ho Chi Minh City", emoji: "🛍️", hotel: "Felix Hotel Saigon — Wi‑Fi okay, desk in room, breakfast not confirmed", blocks: [["12:05 AM", "Arrive SGN Terminal 2"], ["12:45–1:30 AM", "Immigration + baggage"], ["1:30–2:15 AM", "Grab to Felix Hotel"], ["2:30–10:00 AM", "Work shift"], ["10:00–11:30 AM", "Reset + brunch"], ["11:30 AM–3:30 PM", "Saigon shopping marathon"], ["12:30–2:00 PM", "Boyfriend haircut at 4RAU while Kyla shops nearby"], ["3:30–4:15 PM", "Return Felix, drop shopping bags"], ["4:15–5:15 PM", "Quick photo stop or rest"], ["5:15–5:50 PM", "Refresh for food tour"], ["6:00–10:00 PM", "Motorbike street food tour"], ["10:30–11:00 PM", "Shower, pack, charge"], ["11:00 PM", "Sleep"]] },
-        { date: "June 12", city: "Ho Chi Minh City → Hanoi → Sapa", emoji: "🚌", hotel: "Felix checkout + G8 sleeper bus to Sapa CatCat Hills", blocks: [["2:30–10:00 AM", "Work shift"], ["10:00–11:00 AM", "Pack + checkout prep"], ["11:00 AM", "Checkout Felix Hotel"], ["11:30 AM–12:00 NN", "Grab to SGN Domestic Terminal"], ["12:00–1:00 PM", "Airport lunch/snack"], ["1:20 PM", "VietJet VJ142 SGN to HAN"], ["3:30 PM", "Arrive Noi Bai Airport"], ["3:30–5:15 PM", "Airport buffer"], ["5:15 PM", "Go to G8 pickup point, Domestic Terminal Floor 1 Gate E1"], ["5:45 PM", "G8 cabin sleeper bus to Sapa"]] },
-        { date: "June 13", city: "Sapa / Cat Cat Village", emoji: "🏔️", hotel: "Sapa CatCat Hills — breakfast included, Wi‑Fi okay, 24/7 reception", blocks: [["12:00–2:00 AM", "Possible Sapa arrival"], ["Arrival", "Check in at Sapa CatCat Hills"], ["2:30–10:00 AM", "Work shift"], ["10:00 AM–12:00 NN", "Recovery sleep"], ["12:00–1:00 PM", "Lunch"], ["1:00–1:30 PM", "Glam prep"], ["1:30–6:00 PM", "Cat Cat Village content block: costume rental, village walk, waterfall/bridge shots, rainbow slide, drone/rainbow slide if available"], ["6:00–7:00 PM", "Return hotel/rest"], ["7:30–8:30 PM", "Dinner in Sapa town"], ["9:30–10:00 PM", "Sleep"]] },
-        { date: "June 14", city: "Sapa → Hanoi", emoji: "🌈", hotel: "Sapa CatCat checkout; Royal Holiday Hanoi room kept for early arrival", blocks: [["2:30–10:00 AM", "Work shift"], ["10:00–11:00 AM", "Breakfast + pack"], ["11:00–12:00 NN", "Checkout + luggage storage"], ["12:00–1:00 PM", "Lunch near Sun Plaza / Sapa Station"], ["Afternoon", "Weather-based route — Priority: Green Valley / Alpine Coaster / Rainbow Bridge"], ["If clear", "Fansipan + Muong Hoa + Green Valley + Moana"], ["If foggy", "Green Valley + Moana + Glass Bridge/Heaven Gate"], ["5:30–7:00 PM", "Dinner + retrieve luggage"], ["8:45–9:15 PM", "Ready for HK Buslines pickup"], ["10:00 PM", "HK Buslines Sapa to Hanoi"]] },
-        { date: "June 15", city: "Hanoi / Ba Vi / Train Street", emoji: "📸", hotel: "Royal Holiday Hanoi — breakfast included, luggage storage after checkout", blocks: [["4:00–5:00 AM", "Arrive Hanoi"], ["4:30 AM", "Go to Royal Holiday Hanoi Hotel"], ["4:30–8:00 AM", "Work + breakfast + shower rotation"], ["Morning task", "Check Train Street schedule first thing and message Train Street cafés. Target train: 7:10 PM or 7:50 PM"], ["8:00–8:30 AM", "Pack + leave big luggage at Royal Holiday storage"], ["8:30–9:00 AM", "Grab to Mira Guitar Class / Mira Studio"], ["9:00 AM–12:00 NN", "Glam team / dress-up"], ["12:00–12:30 PM", "Quick lunch/snack"], ["12:30–1:30/2:00 PM", "Travel to Ba Vi with photographer/team if possible"], ["1:30/2:00–5:00 PM", "Ba Vi photoshoot: Old Church Ruins, Pine Forest, mossy walls, forest road"], ["5:00–6:30 PM", "Ba Vi to Hanoi / Train Street area"], ["6:30–7:00 PM", "Quick dinner/snack"], ["7:00–8:00 PM", "Train Street Café — preferred: Train Street Coffee 69; backups: Hanoi Train Track Café, Nam Vy Coffee, Coffee 90 Train Street"], ["8:00 PM sharp", "Leave for airport or hotel luggage pickup first"], ["10:45 PM", "VietJet VJ167 HAN to SGN"], ["12:55 AM June 16", "Arrive SGN Terminal 1"]] },
-        { date: "June 16", city: "Ho Chi Minh City → Mui Ne", emoji: "🎂", hotel: "Anket De’ River Mũi Né Resort — breakfast included; birthday note and requests sent", blocks: [["1:30–2:00 AM", "Private car pickup from SGN to Mui Ne"], ["2:00–6:30 AM", "Sleep in car"], ["6:00–7:00 AM", "Arrive Anket De’ River Resort"], ["7:00–11:00 AM", "Recovery sleep / resort rest"], ["11:00 AM–1:00 PM", "Birthday brunch + glam prep"], ["1:00–1:45 PM", "Resort/pool content"], ["1:45 PM", "Prepare for dunes"], ["2:00–6:00 PM", "Private Mui Ne Jeep Sunset Tour"], ["6:30–7:30 PM", "Return resort / shower"], ["7:30 PM onward", "Birthday dinner"]] },
-        { date: "June 17", city: "Mui Ne → Ho Chi Minh City → Manila", emoji: "🧳", hotel: "Anket checkout + SGN Terminal 2 departure", blocks: [["2:30–10:00 AM", "Final work shift abroad"], ["10:00–11:30 AM", "Fairy Stream removed; use time for resort photos, packing, rest, final shower"], ["11:30 AM–12:00 NN", "Checkout prep"], ["12:00–1:30 PM", "Lunch + final packing"], ["2:30 PM", "Private car Mui Ne to SGN Airport Terminal 2"], ["Optional on route", "Lotte Mart / supermarket stop only if traffic is okay and driver agrees"], ["7:00–7:30 PM", "Arrive SGN Terminal 2"], ["Airport", "Check-in, VAT refund if applicable, immigration, security"], ["9:50 PM", "Cebu Pacific 5J754 SGN to MNL"], ["1:45 AM June 18", "Arrive Manila"]] }
-      ],
-      shopping: {
-        style: "Unique fits, ulzzang, sweet, chic, dresses, streetstyle, statement pieces. Avoid basic/plain pieces unless practical.",
-        clusters: ["District 1 core: The New Playground, ONON Made, Enuff Studio, Naked by V, Huula, Bunny Hill Concept, Darlingism, LSoul, Flane, Rechic, Rubies, L’Espoir, Viery Studios", "Bikini/corset cluster: LACE, Sissy Nation", "Shoes: Better Shoes", "Souvenirs/luggage: Ha’s Souvenir Shop, Tired City, Collective Memory"],
-        outfits: ["Airport", "Saigon shopping", "Food tour", "Sapa", "Cat Cat base outfit", "Ba Vi shoot", "Mui Ne birthday", "Bikini", "Dunes outfit", "Return outfit"]
-      },
-      miniBagBase: ["Power bank", "Phone strap", "VND cash", "1–2 cards", "Passport copy", "Tissue/wipes", "Lipstick/powder", "Sunscreen", "Medicine/motion sickness meds", "Umbrella/raincoat", "Water", "Safety pins", "Hair tie/clip", "Extra socks"],
-      miniBagDays: [
-        { day: "Jun 11", label: "Saigon shopping + food tour", items: ["Small bag", "Foldable tote", "Comfy shoes", "Makeup retouch"] },
-        { day: "Jun 13", label: "Cat Cat", items: ["Cash", "Comfy shoes", "Wipes", "Lipstick/powder", "Hair clip", "Jacket/scarf"] },
-        { day: "Jun 14", label: "Sapa", items: ["Jacket", "Raincoat/umbrella", "Cash", "Motion sickness meds"] },
-        { day: "Jun 15", label: "Ba Vi", items: ["Shoot outfit items", "Backup slippers", "Mosquito repellent", "Safety pins", "Water", "Makeup retouch"] },
-        { day: "Jun 16", label: "Dunes", items: ["1.8M–2.2M VND safe cash", "Sunglasses", "Scarf", "Water", "Phone strap", "Sand-friendly shoes"] },
-        { day: "Jun 17", label: "Flight", items: ["Passport", "Tickets/screenshots", "VAT receipts/items if claiming", "Power bank", "Snacks", "Return outfit"] }
+      contacts: [
+        { name: "Felix Hotel Saigon", type: "Hotel", phone: "+84 868 036 299", address: "219/8A Phạm Ngũ Lão, District 1, Ho Chi Minh City" },
+        { name: "Sapa CatCat Hills Resort & Spa", type: "Hotel", phone: "+84 2143 779 789", whatsapp: "+84 819 268 668", address: "86 Fansipan, Sapa, Lao Cai, Vietnam" },
+        { name: "Royal Holiday Hanoi Hotel", type: "Hotel", phone: "+84 243 938 0433", whatsapp: "+84 946 883 179", address: "19 Hàng Hành, Hoan Kiem District, Hanoi" },
+        { name: "Anket De’ River Mũi Né Resort", type: "Hotel", phone: "+84 922 192 929", address: "50 Huỳnh Thúc Kháng, Phường Mũi Né, Phan Thiết" },
+        { name: "Emergency Vietnam", type: "Emergency", phone: "113 police / 115 ambulance", address: "Use hotel front desk for local support and translation." }
       ],
       expenses: [
-        ["Felix Hotel", "Hotel", "—", "Paid", ""], ["Sapa CatCat Hills", "Hotel", "—", "Booked/Confirmed", ""], ["Royal Holiday Hanoi", "Hotel", "—", "Paid", "Booking ID 1726590471"], ["Anket De’ River", "Hotel", "₱6,882.17", "Paid", "Booking ID 1726593044"], ["G8 Bus", "Transfer", "₱2,332.10", "Paid", "KBP240013"], ["HK Bus", "Transfer", "—", "Booked", ""], ["Saigon food tour", "Activity", "—", "Booked", ""], ["4RAU Barber", "Activity", "—", "Booked", ""], ["Private car HCMC to Mui Ne", "Transfer", "Estimated 1.6M VND for 7-seater", "Cash on arrival", ""], ["Private car Mui Ne to SGN", "Transfer", "Estimated 1.6M VND for 7-seater", "Cash on arrival", ""], ["Mui Ne Jeep Tour", "Activity", "600k VND", "Cash on arrival", ""], ["White Sand Dunes ATV extra", "Activity", "Prepare 800k–1.2M VND", "Pay onsite", ""], ["Pocket Wi‑Fi/eSIM", "Connectivity", "—", "Not yet", ""], ["Saigon luggage storage", "Logistics", "—", "Not yet", ""], ["Ba Vi transport/photoshoot logistics", "Logistics", "—", "Not yet", ""], ["Camera rental before trip", "Gear", "—", "Not yet", ""], ["Shopping haul", "Shopping", "—", "Not yet", ""], ["Food cash buffer", "Food", "—", "Not yet", ""]
+        ["International flights", "Flights", "Paid / confirm final baggage", "Keep Cebu Pacific itinerary screenshots offline."],
+        ["Domestic flights", "Flights", "Booked", "VJ142 and VJ167; reconfirm flight status day before."],
+        ["Hotels", "Stay", "Booked", "Confirm early/late arrivals and luggage storage."],
+        ["Mui Ne car", "Transport", "To confirm", "Confirm return car timing and exact pickup/drop-off."],
+        ["Sapa/Hanoi transport", "Transport", "To confirm", "Keep driver contact and cash ready."],
+        ["Food tour / birthday activities", "Activities", "To confirm", "Check weather and backup indoor options."],
+        ["Lotte Mart pasalubong", "Shopping", "Cash/card", "Set haul budget and baggage allowance." ]
       ],
-      finalize: ["Pocket Wi‑Fi + eSIM/local SIM", "Saigon luggage storage/delivery for shopping haul", "Jun 17 Mui Ne to SGN private car final confirmation", "Ba Vi transport with photographer/team", "Train Street schedule/café confirmation on Jun 15 morning", "Sapa Jun 14 weather-based route", "Cat Cat costume/rainbow slide/drone onsite", "Camera rental before travel date", "HR/immigration documents", "Vietnam Pre-Arrival Form QR", "Checklist to bring to follow"],
-      immigrationAnswer: "I am traveling to Vietnam for tourism and my birthday trip with my boyfriend. We will visit Ho Chi Minh City, Sapa, Hanoi, and Mui Ne. We have confirmed flights, hotels, local transfers, and a confirmed return flight to Manila on June 17, 2026.",
-      photoPriorities: {
-        "June 11": "shopping haul, BF haircut, food tour, Saigon night",
-        "June 13": "Cat Cat costume, rainbow slide, village shots",
-        "June 14": "Sapa mountain shots, Green Valley/Rainbow Bridge, Moana/Glass Bridge if possible",
-        "June 15": "Ba Vi cinematic shoot, Train Street",
-        "June 16": "birthday resort, dunes, ATV/jeep sunset",
-        "June 17": "resort slow morning, Lotte Mart haul if time"
-      },
-      shotChecklist: ["Wide shot", "Portrait shot", "Couple shot", "Detail shot", "Video clip", "Walking shot", "Food/detail shot", "Outfit check", "Behind-the-scenes clip"],
+      finalChecklist: [
+        "Screenshot all booking pages, hotel addresses, and contacts.",
+        "Download offline maps for Ho Chi Minh City, Sapa, Hanoi, and Mui Ne.",
+        "Prepare eSIM/SIM plus backup pocket Wi‑Fi or roaming.",
+        "Save pre-arrival/immigration form confirmation after completion.",
+        "Confirm hotel luggage storage windows and late arrivals.",
+        "Confirm Mui Ne return car, dune tour, and pickup times.",
+        "Pack medicine, chargers, power bank, adapters, work laptop, and rain layer."
+      ],
+      miniBag: [
+        "Passport + phone + wallet",
+        "Power bank + cable",
+        "Wet wipes / tissue / sanitizer",
+        "Lip balm / small makeup refresh kit",
+        "Sunglasses + hair clip",
+        "Small cash in VND",
+        "Rain layer or compact umbrella",
+        "Printed/screenshot vouchers for the day"
+      ],
       photoGuides: [
-        {
-          title: "Saigon / Ho Chi Minh City Photo Guide",
-          photoIdeas: ["Airport fit check", "Shopping haul mirror videos", "Streetwear try-on clips", "People’s Committee Building elegant city shots", "Nguyen Hue Walking Street walking videos", "Saigon Opera House classy outfit photos", "Central Post Office exterior tourist shot", "Food tour helmet selfie", "Scooter POV video", "Street food closeups", "Flower market bouquet shot", "Night bridge/city lights shot"],
-          poseIdeas: ["walking away while looking back", "holding shopping bags", "mirror try-on with phone covering face", "candid laughing while eating", "helmet selfie with boyfriend", "crossing street city-style shot", "close-up food reaction shot"],
-          outfitNotes: "Cute airport fit, streetwear layers for shopping, and one classy neutral/elegant outfit for city landmarks and night lights.",
-          mustCapture: ["Airport fit check", "Shopping haul mirror video", "Helmet selfie with boyfriend", "Night bridge/city lights shot"],
-          optionalShots: ["Flower market bouquet shot", "Scooter POV video", "Central Post Office exterior tourist shot"]
-        },
-        {
-          title: "BF Haircut / Glow-Up Photo Guide",
-          photoIdeas: ["before haircut selfie", "barber chair photo", "after haircut close-up", "outfit check after haircut", "helmet selfie after food tour"],
-          poseIdeas: ["side profile to show cut", "hand through hair", "looking down casual shot", "mirror selfie together", "before-and-after collage placeholder"],
-          outfitNotes: "Keep a clean top ready after the haircut so the after-photo looks intentional and fresh.",
-          mustCapture: ["Before selfie", "After haircut close-up", "Side profile to show cut"],
-          optionalShots: ["Barber chair candid", "Mirror selfie together", "Before-and-after collage placeholder"]
-        },
-        {
-          title: "Sapa / Cat Cat Village Photo Guide",
-          photoIdeas: ["Hmong costume portraits", "stone pathway walking shot", "bridge/waterfall shot", "shawl twirl", "doorway/window portrait", "rainbow slide drone clip", "couple walking clips"],
-          poseIdeas: ["looking down while holding skirt", "walking uphill with back view", "sitting on steps", "holding hands while walking", "shawl flowing/twirl", "looking sideways with mountain background", "candid fixing costume/accessories"],
-          outfitNotes: "Wear comfortable shoes under the costume and keep hair/accessories secure for walking paths and twirl shots.",
-          mustCapture: ["Hmong costume portrait", "Stone pathway walking shot", "Rainbow slide clip", "Couple walking clip"],
-          optionalShots: ["Doorway/window portrait", "Candid fixing costume/accessories", "Bridge/waterfall shot"]
-        },
-        {
-          title: "Sapa Mountain / Fansipan / Moana / Glass Bridge / Green Valley Photo Guide",
-          photoIdeas: ["red Muong Hoa train window shot", "valley view shot", "cable car view", "summit stairs", "fog/cloud cinematic shot", "Alpine coaster/kart clip", "rainbow bridge shot", "Moana giant hands", "Bali gate", "swing shot", "glass bridge floor shot", "scarf/hair windy shot"],
-          poseIdeas: ["coat over shoulder", "looking into distance", "holding railing while looking sideways", "sitting on train seat by window", "walking on bridge shot from behind", "couple silhouette", "scarf flying shot", "dramatic mountain wide shot"],
-          outfitNotes: "Bring a warm layer, scarf, and wind-friendly hair plan; pastel or neutral coat will pop against fog and mountains.",
-          mustCapture: ["Train window shot", "Valley or summit wide shot", "Rainbow Bridge or Moana hands", "Scarf/hair windy shot"],
-          optionalShots: ["Glass bridge floor shot", "Alpine coaster/kart clip", "Bali gate or swing shot"]
-        },
-        {
-          title: "Hanoi / Ba Vi Photoshoot Guide",
-          photoIdeas: ["old church doorway dramatic shot", "pine forest walking-away shot", "sitting on stone/steps", "mossy wall portrait", "forest road walking shot", "long dress movement shot", "behind-the-scenes clips", "Train Street café shot", "egg coffee shot if Cafe Giang happens"],
-          poseIdeas: ["standing in church doorway", "walking away holding dress", "sitting sideways on steps", "looking down softly", "leaning on old wall", "couple walking through forest", "train café table shot", "holding coffee with train tracks background"],
-          outfitNotes: "Prioritize a long dress or flowy skirt for movement, plus comfy backup shoes for forest walking.",
-          mustCapture: ["Old church doorway dramatic shot", "Pine forest walking-away shot", "Long dress movement shot", "Train Street café shot"],
-          optionalShots: ["Egg coffee shot", "Behind-the-scenes clips", "Mossy wall portrait"]
-        },
-        {
-          title: "Mui Ne Birthday / Resort / Dunes Photo Guide",
-          photoIdeas: ["birthday outfit mirror shot", "pool view room shot", "brunch table birthday shot", "couple resort clips", "White Sand Dunes ATV action clip", "yellow jeep/truck photo", "dune ridge walking shot", "scarf flying shot", "sunglasses desert shot", "sunset silhouette", "birthday desert reel"],
-          poseIdeas: ["standing on dune ridge", "walking barefoot/with sandals on sand", "sitting on jeep", "leaning on jeep/truck", "sunglasses close-up", "scarf over shoulder", "looking back while walking", "couple walking in dunes", "birthday cake/dinner shot"],
-          outfitNotes: "Birthday outfit plus desert scarf/sunglasses; choose sand-friendly sandals and a look that moves well in wind.",
-          mustCapture: ["Birthday outfit mirror shot", "ATV or jeep action clip", "Sunset silhouette", "Birthday desert reel"],
-          optionalShots: ["Pool view room shot", "Brunch table birthday shot", "Sunglasses close-up"]
-        },
-        {
-          title: "Lotte Mart / Pasalubong Photo Guide",
-          photoIdeas: ["grocery haul flatlay", "coffee/snacks haul photo", "cart shot", "receipt/budget shot"],
-          poseIdeas: ["holding coffee packs", "cart POV", "pasalubong haul table layout"],
-          outfitNotes: "Casual comfy shopping outfit; keep haul items grouped by coffee, snacks, gifts, and budget/receipt.",
-          mustCapture: ["Coffee/snacks haul photo", "Cart POV", "Pasalubong haul table layout"],
-          optionalShots: ["Receipt/budget shot", "Holding coffee packs"]
-        }
+        { title: "Saigon", must: ["District 1 street scene", "Coffee/café shot", "Food tour table", "Saigon night lights"], poses: ["crosswalk walk-by", "holding coffee", "looking up at signs", "couple food cheers"], outfit: "Light city outfit; comfortable sandals/sneakers for walking and food tour." },
+        { title: "BF Haircut Glow-Up", must: ["Before mirror shot", "Barber chair clip", "Fresh cut portrait", "After outfit check"], poses: ["serious clean portrait", "side profile", "hair touch", "couple reaction"], outfit: "Simple top that frames the haircut; avoid busy collars." },
+        { title: "Cat Cat Village", must: ["Costume portrait", "Village path wide shot", "Waterfall/detail shot", "Rainbow slide clip"], poses: ["walking away", "looking back", "holding hat/prop", "couple on path"], outfit: "Coordinate costume colors; bring comfortable walking shoes and hair accessories." },
+        { title: "Sapa Mountain / Green Valley / Moana / Glass Bridge", must: ["Mountain wide shot", "Rainbow Bridge", "Moana prop shot", "Glass Bridge if possible"], poses: ["arms open to valley", "standing on bridge center", "wind hair moment", "wide couple silhouette"], outfit: "Layers for cool weather; flowy piece photographs well against green mountains." },
+        { title: "Hanoi / Ba Vi / Train Street", must: ["Old Quarter walk", "Ba Vi cinematic road shot", "Train Street safety shot", "Coffee by tracks if open"], poses: ["slow walking clip", "seated coffee portrait", "looking out car/window", "handheld couple POV"], outfit: "Cinematic neutral layers; comfortable shoes for walking and Ba Vi terrain." },
+        { title: "Mui Ne Birthday / Dunes", must: ["Birthday resort shot", "Dune ridge portrait", "ATV/jeep clip", "Sunset silhouette"], poses: ["walking on dune ridge", "sitting on jeep", "sunglasses close-up", "couple sunset walk"], outfit: "Birthday look plus scarf/sunglasses; choose sand-friendly footwear." },
+        { title: "Lotte Mart / Pasalubong", must: ["Cart POV", "Coffee/snack haul", "Receipt/budget shot", "Flatlay before packing"], poses: ["holding coffee packs", "cart push candid", "haul table layout", "snack taste-test clip"], outfit: "Casual comfy shopping outfit; group haul by coffee, snacks, gifts, and baggage weight." }
       ]
     };
 
     const tabs = [
-      ["overview", "🌸 Overview"], ["before", "✅ Before Flight Checklist"], ["itinerary", "🗓️ Full Detailed Itinerary"], ["immigration", "🛂 Immigration Itinerary"], ["booked", "🎟️ Booked / Confirmed"], ["contacts", "☎️ Contacts"], ["photos", "📸 Photo References + Pose Guide"], ["places", "👗 Places + Outfits"], ["expenses", "💸 Expenses"], ["minibag", "🎒 Daily Mini Bag"], ["finalize", "📌 Things To Finalize"]
+      ["overview", "🏠", "Home"],
+      ["itinerary", "🗓️", "Days"],
+      ["immigration", "🛂", "Immigration"],
+      ["contacts", "☎️", "Contacts"],
+      ["photos", "📸", "Photos"],
+      ["expenses", "💸", "Costs"],
+      ["checklists", "✅", "Lists"]
     ];
 
-    const app = document.getElementById("app");
-    const escapeHtml = (s) => String(s ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
-    const list = (items, cls = "clean") => `<ul class="${cls}">${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
-    const checkboxList = (prefix, items) => `<div class="checklist">${items.map((item, i) => `<label class="check-item searchable" data-search-label="${escapeHtml(item)}"><input type="checkbox" data-check-id="${escapeHtml(prefix)}-${i}"><span>${escapeHtml(item)}</span></label>`).join("")}</div>`;
-    const statusTag = (status) => {
-      const s = status.toLowerCase();
-      const cls = s.includes("paid") ? "paid" : s.includes("cash") ? "cash" : s.includes("not") || s.includes("onsite") ? "due" : "booked";
-      return `<span class="tag ${cls}">${escapeHtml(status)}</span>`;
-    };
-    const telHref = (value) => `tel:${String(value).replace(/[^+\d]/g, "")}`;
-    const isCopyField = (label) => /address|contact|whatsapp|zalo|viber|manager|pickup|drop-off|line id|booking|reference/i.test(label);
-    const detailRows = (pairs, copyable = false) => pairs.filter(([,v]) => v).map(([k,v]) => {
-      const safeValue = escapeHtml(v);
-      const valueHtml = /contact|whatsapp|zalo|viber|manager/i.test(k) && /^\+/.test(String(v).trim()) ? `<a class="phone-link" href="${telHref(v)}">${safeValue}</a>` : safeValue;
-      if (!copyable || !isCopyField(k)) return `<p><strong>${escapeHtml(k)}:</strong> ${valueHtml}</p>`;
-      return `<div class="copy-row"><div class="copy-text"><strong>${escapeHtml(k)}:</strong> ${valueHtml}</div><button class="copy-btn" type="button" data-copy="${safeValue}">Copy</button></div>`;
-    }).join("");
-    const details = (pairs) => detailRows(pairs, false);
-    const copyableDetails = (pairs) => detailRows(pairs, true);
-    const copyableList = (items) => `<ul class="clean">${items.map(item => {
-      const [maybeLabel, ...rest] = String(item).split(":");
-      const hasLabel = rest.length > 0;
-      const label = hasLabel ? maybeLabel : "Note";
-      const value = hasLabel ? rest.join(":").trim() : item;
-      const safe = escapeHtml(item);
-      const copyButton = isCopyField(label) ? ` <button class="copy-btn" type="button" data-copy="${escapeHtml(value)}">Copy</button>` : "";
-      return `<li>${safe}${copyButton}</li>`;
-    }).join("")}</ul>`;
-    const expenseCards = () => `<div class="expense-cards searchable">${trip.expenses.map(r => `<article class="expense-card searchable"><h3>${escapeHtml(r[0])}</h3><div>${statusTag(r[3])}</div><div class="expense-meta"><div><strong>Category</strong><span>${escapeHtml(r[1])}</span></div><div><strong>Cost</strong><span>${escapeHtml(r[2])}</span></div>${r[4] ? `<div><strong>Notes</strong><span>${escapeHtml(r[4])}</span></div>` : ""}</div></article>`).join("")}</div>`;
-    const placeholders = () => `<div class="placeholder-grid"><div class="reference-placeholder">[Add reference photo here]</div><div class="reference-placeholder">[Pose reference here]</div><div class="reference-placeholder">[Outfit reference here]</div></div>`;
-    const photoGuideCard = (guide, i) => `<details class="photo-card searchable" ${i === 0 ? "open" : ""}><summary class="photo-summary"><div class="summary-row"><h2>📸 ${escapeHtml(guide.title)}</h2><span class="chevron">⌄</span></div><p class="muted small">Tap to expand photo ideas, poses, outfits, and reference placeholders.</p></summary><div class="photo-body"><div class="photo-columns"><section><h3>Photo ideas</h3>${list(guide.photoIdeas)}</section><section><h3>Pose ideas</h3>${list(guide.poseIdeas)}</section><section><h3>Outfit notes</h3><p>${escapeHtml(guide.outfitNotes)}</p></section><section><h3>Must-capture shots</h3>${list(guide.mustCapture)}</section><section><h3>Optional shots if time allows</h3>${list(guide.optionalShots)}</section><section><h3>Reference image placeholders</h3>${placeholders()}</section></div></div></details>`;
+    const shotChecklist = ["Wide shot", "Portrait shot", "Couple shot", "Detail shot", "Video clip", "Walking shot", "Outfit check", "Behind-the-scenes clip"];
+    const esc = (value) => String(value ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]));
+    const list = (items) => `<ul>${items.map(item => `<li>${esc(item)}</li>`).join("")}</ul>`;
+    const checkList = (key, items) => `<div class="checklist">${items.map((item, index) => `<label class="check-item searchable" data-search-label="${esc(item)}"><input type="checkbox" data-check-id="${esc(key)}-${index}"><span>${esc(item)}</span></label>`).join("")}</div>`;
+    const table = (headers, rows) => `<div class="table-wrap"><table><thead><tr>${headers.map(h => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    const tel = (phone) => `tel:${String(phone).replace(/[^+\d]/g, "")}`;
 
-    function render() {
-      document.getElementById("tabs").innerHTML = tabs.map(([id, label], i) => `<button class="tab-btn" role="tab" id="tab-${id}" aria-controls="panel-${id}" aria-selected="${i === 0}" data-tab="${id}">${label}</button>`).join("");
-      app.innerHTML = tabs.map(([id]) => `<section class="tab-panel ${id === "overview" ? "active" : ""}" id="panel-${id}" role="tabpanel" aria-labelledby="tab-${id}">${renderPanel(id)}</section>`).join("");
-      restoreChecks();
+    function detailRow(label, value, copy = false, phone = false) {
+      if (!value) return "";
+      const valueHtml = phone ? `<a class="phone" href="${tel(value)}">${esc(value)}</a>` : esc(value);
+      if (!copy) return `<div class="meta-row"><strong>${esc(label)}</strong><span>${valueHtml}</span></div>`;
+      return `<div class="copy-row"><div><strong>${esc(label)}:</strong> ${valueHtml}</div><button class="copy-btn" type="button" data-copy="${esc(value)}">Copy</button></div>`;
+    }
+
+    function dayCard(day, index, open = false) {
+      return `<details class="day-card searchable" data-trip-date="${esc(day.date)}" ${open ? "open" : ""} data-search-label="${esc(day.date + " " + day.title + " " + day.short + " " + day.priorities)}">
+        <summary class="day-summary">
+          <div class="summary-main"><h3>${esc(day.date)} — ${esc(day.title)}</h3><span class="chev">⌄</span></div>
+          <div class="muted small">${esc(day.short)}</div>
+          <div><span class="tag todo">Photo priorities today</span></div>
+        </summary>
+        <div class="day-body">
+          <div class="priority">📸 ${esc(day.priorities)}</div>
+          ${day.plan.map(([time, text]) => `<div class="time-block"><div class="time">${esc(time)}</div><div>${esc(text)}</div></div>`).join("")}
+        </div>
+      </details>`;
+    }
+
+    function photoGuide(guide, index) {
+      return `<details class="photo-card searchable" ${index === 0 ? "open" : ""} data-search-label="${esc(guide.title + " " + guide.must.join(" ") + " " + guide.poses.join(" "))}">
+        <summary class="photo-summary"><div class="summary-main"><h3>📸 ${esc(guide.title)}</h3><span class="chev">⌄</span></div><div class="muted small">Must-captures, poses, outfit notes, placeholders, and shot checklist.</div></summary>
+        <div class="photo-body">
+          <div class="photo-columns">
+            <section><h3>Must-capture shots</h3>${list(guide.must)}</section>
+            <section><h3>Pose ideas</h3>${list(guide.poses)}</section>
+            <section><h3>Outfit notes</h3><p>${esc(guide.outfit)}</p></section>
+          </div>
+          <div class="placeholder-grid">
+            <div class="placeholder">[Add reference photo here]</div>
+            <div class="placeholder">[Pose reference here]</div>
+            <div class="placeholder">[Outfit reference here]</div>
+          </div>
+          <div class="section-title"><h3>Shot checklist</h3></div>
+          ${checkList(`photo-${index}`, shotChecklist)}
+        </div>
+      </details>`;
+    }
+
+    function contactCard(contact) {
+      return `<article class="contact-card searchable" data-search-label="${esc(Object.values(contact).join(" "))}">
+        <h3>${esc(contact.name)}</h3>
+        <span class="tag">${esc(contact.type)}</span>
+        <div class="meta-grid">
+          ${detailRow("Phone", contact.phone, true, true)}
+          ${detailRow("WhatsApp", contact.whatsapp, true, true)}
+          ${detailRow("Address", contact.address, true)}
+        </div>
+      </article>`;
+    }
+
+    function expenseCard(row, index) {
+      return `<article class="expense-card searchable" data-search-label="${esc(row.join(" "))}">
+        <h3>${esc(row[0])}</h3>
+        <span class="tag">${esc(row[1])}</span><span class="tag ${row[2].toLowerCase().includes("confirm") ? "todo" : "done"}">${esc(row[2])}</span>
+        <div class="meta-grid"><div class="meta-row"><strong>Notes</strong><span>${esc(row[3])}</span></div></div>
+      </article>`;
+    }
+
+    function renderOverview() {
+      return `<section class="panel active" id="panel-overview">
+        <div class="dashboard-grid two-col">
+          <article class="card compact-card searchable" data-search-label="Next Important Tasks pre arrival internet luggage Mui Ne Train Street">
+            <h2>Next Important Tasks</h2>
+            <div class="task-list">${trip.nextTasks.map(t => `<div class="task-row"><span class="dot"></span><strong>${esc(t)}</strong></div>`).join("")}</div>
+          </article>
+          <article class="card compact-card searchable" data-search-label="Today current day trip overview June 11">
+            <h2>Today / Current Day</h2>
+            <p class="muted">Default useful day: <strong>June 11 — Saigon reset + shopping + food tour</strong>.</p>
+            <p>Complete form, verify internet backup, confirm luggage storage, then do shopping/BF haircut/food tour shots.</p>
+            <button class="btn pink" type="button" data-go="itinerary" data-current-day="true">Open today card</button>
+          </article>
+        </div>
+        <div class="section-title"><h2>Trip Overview</h2></div>
+        <div class="stack two-col">${trip.overview.map(([k, v]) => `<article class="card searchable"><h3>${esc(k)}</h3><p>${esc(v)}</p></article>`).join("")}</div>
+        <details class="card accordion searchable"><summary class="acc-summary"><div class="summary-main"><h2>Flights</h2><span class="chev">⌄</span></div><div class="muted small">Tap for compact flight cards.</div></summary><div class="acc-body stack">${trip.flights.map(f => `<article class="card"><h3>${esc(f.item)}</h3><p><strong>${esc(f.date)}</strong></p><p>${esc(f.notes)}</p></article>`).join("")}</div></details>
+        <details class="card accordion searchable"><summary class="acc-summary"><div class="summary-main"><h2>Hotels</h2><span class="chev">⌄</span></div><div class="muted small">Tap for addresses and phone links.</div></summary><div class="acc-body stack">${trip.hotels.map(h => `<article class="contact-card"><h3>${esc(h.name)}</h3><span class="tag">${esc(h.stay)}</span><div class="meta-grid">${detailRow("Phone", h.phone, true, true)}${detailRow("WhatsApp", h.whatsapp, true, true)}${detailRow("Address", h.address, true)}${detailRow("Notes", h.notes)}</div></article>`).join("")}</div></details>
+      </section>`;
     }
 
     function renderPanel(id) {
-      if (id === "overview") return `
-        <div class="kpi searchable"><div class="card"><span class="muted">👥 Travelers</span><strong>${trip.travelers.length}</strong><p>${trip.travelers.join(" + ")}</p></div><div class="card"><span class="muted">📅 Dates</span><strong>${trip.dates}</strong><p>${trip.purpose}</p></div><div class="card"><span class="muted">📍 Cities</span><strong>4 stops</strong><p>${trip.cities}</p></div><div class="card"><span class="muted">💻 Private note</span><strong>Work shift</strong><p>${trip.workShift}</p></div></div>
-        <div class="section-title"><h2>✈️ Flight Snapshot</h2></div><div class="grid two">${trip.flights.map(f => `<article class="card searchable"><h3>${f.airline} ${f.flight}</h3><p class="tag">${f.route}</p>${details([["Departure", f.depart], ["Arrival", f.arrive], ["Booking", f.booking], ["Baggage", f.baggage], ["Note", f.note]])}</article>`).join("")}</div>
-        <div class="section-title"><h2>🏨 Hotel Snapshot</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${copyableDetails([["Address", h.address], ["Stay", h.stay], ["Check-in", h.checkin], ["Check-out", h.checkout], ["Contact", h.contact], ["Breakfast", h.breakfast], ["Notes", h.notes]])}</article>`).join("")}</div>`;
-      if (id === "before") return `<div class="section-title"><h2>✅ Preparation Checklist</h2><span class="pill">Saves offline in this browser</span></div><div class="grid">${trip.beforeFlight.map((d, i) => `<article class="section-card searchable"><h2>${d.date} — ${d.label}</h2>${checkboxList(`before-${i}`, d.items)}</article>`).join("")}</div>`;
-      if (id === "itinerary") return `<div class="section-title"><h2>🗓️ Full Detailed Itinerary</h2><span class="pill">Tap a day to expand</span></div><div class="grid">${trip.itinerary.map((d, i) => {
-        const priority = trip.photoPriorities[d.date];
-        return `<details class="day-card searchable" data-trip-date="${escapeHtml(d.date)}" ${i === 1 ? "open" : ""}><summary class="day-summary"><div class="summary-row"><h2>${d.emoji} ${d.date} — ${d.city}</h2><span class="chevron">⌄</span></div><p class="pill">🏨 ${escapeHtml(d.hotel)}</p>${priority ? `<p class="photo-priority">📸 Photo priorities today: ${escapeHtml(priority)}</p>` : ""}</summary><div class="day-body">${d.blocks.map(([time, text]) => `<div class="time-block"><div class="time">${escapeHtml(time)}</div><div>${escapeHtml(text)}</div></div>`).join("")}<div class="reminder"><h3>🌙 Final Reminder of the Day</h3>${checkboxList(`reminder-${i}`, trip.dailyReminder)}</div></div></details>`;
-      }).join("")}</div>`;
-      if (id === "immigration") return `<article class="section-card searchable"><h2>🛂 Clean Immigration-Friendly Itinerary</h2><p class="pill">No workation details in this section</p>${details([["Purpose", trip.purpose], ["Travelers", trip.travelers.join(" and ")], ["Travel dates", trip.dates], ["Cities", "Ho Chi Minh City, Sapa, Hanoi, Mui Ne"]])}<h3>Short answer if asked</h3><p class="reminder">“${escapeHtml(trip.immigrationAnswer)}”</p></article><div class="section-title"><h2>✈️ Flights</h2></div><div class="grid two">${trip.flights.map(f => `<article class="card searchable"><h3>${f.airline} ${f.flight} — ${f.route}</h3>${details([["Departure", f.depart], ["Arrival", f.arrive], ["Booking", f.booking], ["Baggage", f.baggage]])}</article>`).join("")}</div><div class="section-title"><h2>🏨 Hotels + selected transport</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${copyableDetails([["Address", h.address], ["Stay", h.stay], ["Booking", h.booking], ["Reference", h.reference]])}</article>`).join("")}</div>`;
-      if (id === "booked") return `<div class="section-title"><h2>🎟️ Booked / Confirmed</h2></div><div class="grid two">${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${copyableList(b.details)}</article>`).join("")}</div>`;
-      if (id === "contacts") return `<div class="section-title"><h2>☎️ Contacts + Booking Details</h2><span class="pill">Tap numbers to call • Copy addresses/contact details</span></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>🏨 ${h.name}</h3><div class="contact-line">${copyableDetails([["Address", h.address], ["Contact", h.contact], ["WhatsApp/Zalo/Viber", h.whatsapp], ["Manager", h.manager], ["Booking ID", h.booking], ["Hotel reference", h.reference], ["Confirmed notes", h.notes]])}</div></article>`).join("")}${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${copyableList(b.details)}</article>`).join("")}</div>`;
-      if (id === "photos") return `<div class="section-title"><h2>📸 Photo References + Pose Guide</h2><span class="pill">Editable placeholders + saved shot checklist</span></div><article class="section-card searchable shot-checklist"><h2>✅ Shot Checklist</h2><p class="muted">These checkboxes save offline in this browser with localStorage.</p>${checkboxList("shot-checklist", trip.shotChecklist)}</article><div class="grid">${trip.photoGuides.map(photoGuideCard).join("")}</div>`;
-      if (id === "places") return `<div class="grid two"><article class="section-card searchable"><h2>👗 Style Preference</h2><p>${escapeHtml(trip.shopping.style)}</p><h3>Outfit packing list</h3>${checkboxList("outfits", trip.shopping.outfits)}</article><article class="section-card searchable"><h2>🛍️ Shopping Clusters</h2>${list(trip.shopping.clusters)}<h3>Photo/place notes</h3>${list(["Cat Cat Village: costume rental, village walk, waterfall/bridge shots, rainbow slide, drone/rainbow slide if available", "Sapa route: Green Valley / Alpine Coaster / Rainbow Bridge; clear-day Fansipan option; foggy-day Glass Bridge/Heaven Gate option", "Ba Vi: Old Church Ruins, Pine Forest, mossy walls, forest road", "Train Street: preferred Train Street Coffee 69; backups Hanoi Train Track Café, Nam Vy Coffee, Coffee 90 Train Street", "Mui Ne dunes: White Sand Dunes, ATV, yellow truck/photo road, Red Sand Dunes, beach road, Fishing Village if time allows"])} </article></div>`;
-      if (id === "expenses") return `<div class="section-title"><h2>💸 Expense Tracker</h2><span class="pill">Cards on phone • Table for desktop/print</span></div>${expenseCards()}<div class="table-wrap searchable"><table><thead><tr><th>Item</th><th>Category</th><th>Estimated/Actual Cost</th><th>Paid Status</th><th>Notes</th></tr></thead><tbody>${trip.expenses.map(r => `<tr><td>${escapeHtml(r[0])}</td><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td><td>${statusTag(r[3])}</td><td>${escapeHtml(r[4])}</td></tr>`).join("")}</tbody></table></div>`;
-      if (id === "minibag") return `<div class="grid two"><article class="section-card searchable"><h2>🎒 Base Mini Bag Items</h2>${checkboxList("mini-base", trip.miniBagBase)}</article><article class="section-card searchable"><h2>💡 Mini Bag Rule</h2><p>Pack base items first, then add the day-specific card items. Screenshot vouchers and addresses before leaving Wi‑Fi.</p></article></div><div class="section-title"><h2>Day-specific Mini Bags</h2></div><div class="grid two">${trip.miniBagDays.map((d, i) => `<article class="card searchable"><h3>${d.day} — ${d.label}</h3>${checkboxList(`mini-day-${i}`, d.items)}</article>`).join("")}</div>`;
-      if (id === "finalize") return `<div class="section-title"><h2>📌 Things To Finalize</h2><span class="pill">Last-mile confirmations</span></div><article class="section-card searchable">${checkboxList("finalize", trip.finalize)}</article>`;
+      if (id === "overview") return renderOverview();
+      if (id === "itinerary") return `<section class="panel" id="panel-itinerary"><div class="section-title"><h2>Daily Itinerary</h2><span class="tag">Tap days</span></div><div class="stack">${trip.days.map((d, i) => dayCard(d, i, i === 1)).join("")}</div></section>`;
+      if (id === "immigration") return `<section class="panel" id="panel-immigration"><div class="section-title"><h2>Immigration Itinerary</h2></div><article class="card searchable"><p class="muted">Keep this short and consistent at the counter.</p>${checkList("immigration", trip.immigration)}</article></section>`;
+      if (id === "contacts") return `<section class="panel" id="panel-contacts"><div class="section-title"><h2>Contacts</h2><span class="tag">Tap-to-call</span></div><div class="stack two-col">${trip.contacts.map(contactCard).join("")}</div></section>`;
+      if (id === "photos") return `<section class="panel" id="panel-photos"><div class="section-title"><h2>Photo References + Pose Guide</h2><span class="tag">Collapsible</span></div><div class="stack">${trip.photoGuides.map(photoGuide).join("")}</div></section>`;
+      if (id === "expenses") return `<section class="panel" id="panel-expenses"><div class="section-title"><h2>Expenses</h2><span class="tag">Mobile cards</span></div>${table(["Item", "Category", "Status", "Notes"], trip.expenses.map(r => r.map(esc)))}<div class="mobile-cards desktop-hidden">${trip.expenses.map(expenseCard).join("")}</div></section>`;
+      if (id === "checklists") return `<section class="panel" id="panel-checklists"><div class="section-title"><h2>Checklists</h2></div><div class="stack two-col"><article class="card searchable"><h2>Daily Mini Bag</h2>${checkList("mini", trip.miniBag)}</article><article class="card searchable"><h2>Things To Finalize</h2>${checkList("final", trip.finalChecklist)}</article></div></section>`;
       return "";
+    }
+
+    function render() {
+      document.getElementById("bottomNav").innerHTML = tabs.map(([id, icon, label], index) => `<button class="nav-btn" type="button" data-go="${id}" aria-selected="${index === 0}"><span class="icon">${icon}</span><span>${label}</span></button>`).join("");
+      document.getElementById("content").innerHTML = tabs.map(([id]) => renderPanel(id)).join("");
+      restoreChecks();
+    }
+
+    function switchTab(id, scroll = true) {
+      document.querySelectorAll(".panel").forEach(panel => panel.classList.toggle("active", panel.id === `panel-${id}`));
+      document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.go === id)));
+      document.getElementById("emptyState").classList.remove("show");
+      if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function currentTripDate() {
+      const today = new Date();
+      if (today.getFullYear() === 2026 && today.getMonth() === 5 && today.getDate() >= 10 && today.getDate() <= 17) return `June ${today.getDate()}`;
+      return "June 11";
+    }
+
+    function goCurrentDay() {
+      document.getElementById("searchInput").value = "";
+      applySearch();
+      switchTab("itinerary", false);
+      requestAnimationFrame(() => {
+        const target = [...document.querySelectorAll("[data-trip-date]")].find(el => el.dataset.tripDate === currentTripDate()) || document.querySelector("[data-trip-date='June 11']");
+        if (target) {
+          target.open = true;
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    function applySearch() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      const items = document.querySelectorAll(".searchable");
+      let visible = 0;
+      if (!query) {
+        items.forEach(item => item.classList.remove("hidden-by-search"));
+        document.querySelectorAll(".panel").forEach(panel => panel.classList.toggle("active", panel.id === "panel-overview"));
+        document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.go === "overview")));
+        document.getElementById("emptyState").classList.remove("show");
+        return;
+      }
+      document.querySelectorAll(".panel").forEach(panel => panel.classList.add("active"));
+      document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", "false"));
+      items.forEach(item => {
+        const haystack = `${item.textContent} ${item.dataset.searchLabel || ""}`.toLowerCase();
+        const found = haystack.includes(query);
+        item.classList.toggle("hidden-by-search", !found);
+        if (found) visible += 1;
+      });
+      document.getElementById("emptyState").classList.toggle("show", visible === 0);
     }
 
     function restoreChecks() {
@@ -555,88 +648,40 @@
       });
     }
 
-    function switchTab(id) {
-      document.querySelectorAll(".tab-btn").forEach(btn => btn.setAttribute("aria-selected", btn.dataset.tab === id));
-      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.toggle("active", panel.id === `panel-${id}`));
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function applySearch() {
-      const q = document.getElementById("searchInput").value.trim().toLowerCase();
-      const items = document.querySelectorAll(".searchable");
-      let visible = 0;
-      if (!q) {
-        items.forEach(el => el.classList.remove("hidden-by-search"));
-        document.getElementById("emptyState").classList.remove("show");
-        return;
-      }
-      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.add("active"));
-      document.querySelectorAll(".tab-btn").forEach(btn => btn.setAttribute("aria-selected", "false"));
-      items.forEach(el => {
-        const hay = `${el.textContent} ${el.dataset.searchLabel || ""}`.toLowerCase();
-        const match = hay.includes(q);
-        el.classList.toggle("hidden-by-search", !match);
-        if (match) visible++;
-      });
-      document.getElementById("emptyState").classList.toggle("show", visible === 0);
-    }
-
-    function currentTripDayLabel() {
-      const today = new Date();
-      const year = today.getFullYear();
-      if (year !== 2026) return "June 11";
-      const month = today.getMonth();
-      const date = today.getDate();
-      if (month === 5 && date >= 10 && date <= 17) return `June ${date}`;
-      return "June 11";
-    }
-
-    function goToCurrentDay() {
-      document.getElementById("searchInput").value = "";
-      applySearch();
-      switchTab("itinerary");
-      requestAnimationFrame(() => {
-        const label = currentTripDayLabel();
-        const target = [...document.querySelectorAll("[data-trip-date]")].find(el => el.dataset.tripDate === label) || document.querySelector("[data-trip-date='June 11']");
-        if (target) {
-          target.open = true;
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-    }
-
     async function copyText(value, button) {
       try {
         await navigator.clipboard.writeText(value);
         const old = button.textContent;
-        button.textContent = "Copied!";
-        setTimeout(() => button.textContent = old, 1200);
+        button.textContent = "Copied";
+        setTimeout(() => { button.textContent = old; }, 1100);
       } catch {
         const old = button.textContent;
-        button.textContent = "Copy failed";
-        setTimeout(() => button.textContent = old, 1200);
+        button.textContent = "Copy manually";
+        setTimeout(() => { button.textContent = old; }, 1300);
       }
     }
 
     render();
-    document.getElementById("tabs").addEventListener("click", e => { const btn = e.target.closest(".tab-btn"); if (btn) { document.getElementById("searchInput").value = ""; applySearch(); switchTab(btn.dataset.tab); } });
+    document.addEventListener("click", event => {
+      const go = event.target.closest("[data-go]");
+      if (go) {
+        if (go.dataset.currentDay === "true") goCurrentDay();
+        else switchTab(go.dataset.go);
+      }
+      const copy = event.target.closest("[data-copy]");
+      if (copy) copyText(copy.dataset.copy, copy);
+    });
+    document.getElementById("focusSearch").addEventListener("click", () => document.getElementById("searchInput").focus());
     document.getElementById("searchInput").addEventListener("input", applySearch);
-    document.getElementById("clearSearch").addEventListener("click", () => { document.getElementById("searchInput").value = ""; applySearch(); switchTab("overview"); });
-    document.getElementById("currentDayBtn").addEventListener("click", goToCurrentDay);
-    document.getElementById("currentDayHero").addEventListener("click", goToCurrentDay);
+    document.getElementById("clearSearch").addEventListener("click", () => { document.getElementById("searchInput").value = ""; applySearch(); });
     document.getElementById("backToTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-    document.addEventListener("click", e => { const btn = e.target.closest("[data-copy]"); if (btn) copyText(btn.dataset.copy, btn); });
-    window.addEventListener("scroll", () => document.getElementById("backToTop").classList.toggle("show", window.scrollY > 500));
-    let printOpenedDetails = [];
-    window.addEventListener("beforeprint", () => {
-      printOpenedDetails = [...document.querySelectorAll("details:not([open])")];
-      printOpenedDetails.forEach(detail => detail.open = true);
+    document.getElementById("resetChecks").addEventListener("click", () => {
+      if (confirm("Reset all saved checklist ticks?")) {
+        Object.keys(localStorage).filter(key => key.startsWith("vietnam2026:")).forEach(key => localStorage.removeItem(key));
+        document.querySelectorAll("[data-check-id]").forEach(box => { box.checked = false; box.closest(".check-item").classList.remove("done"); });
+      }
     });
-    window.addEventListener("afterprint", () => {
-      printOpenedDetails.forEach(detail => detail.open = false);
-      printOpenedDetails = [];
-    });
-    document.getElementById("resetChecks").addEventListener("click", () => { if (confirm("Reset all saved checklist ticks for this planner?")) { Object.keys(localStorage).filter(k => k.startsWith("vietnam2026:")).forEach(k => localStorage.removeItem(k)); document.querySelectorAll("[data-check-id]").forEach(box => { box.checked = false; box.closest(".check-item").classList.remove("done"); }); } });
+    window.addEventListener("scroll", () => document.getElementById("backToTop").classList.toggle("show", window.scrollY > 360));
   </script>
 </body>
 </html>

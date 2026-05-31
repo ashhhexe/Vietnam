@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kyla’s 24th Birthday Workation — Vietnam 2026</title>
+  <style>
+    :root {
+      --bg: #fff8fb;
+      --bg-2: #f4fbff;
+      --ink: #3e3340;
+      --muted: #736675;
+      --pink: #ffc7dd;
+      --pink-2: #ffe7f0;
+      --peach: #ffdfc7;
+      --mint: #c9f2df;
+      --sky: #cbe9ff;
+      --lav: #ded2ff;
+      --yellow: #fff0b8;
+      --card: rgba(255,255,255,.86);
+      --line: rgba(96, 69, 95, .14);
+      --shadow: 0 16px 38px rgba(112, 78, 106, .14);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font: 15px/1.55 ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,199,221,.55), transparent 27rem),
+        radial-gradient(circle at 96% 7%, rgba(203,233,255,.7), transparent 26rem),
+        radial-gradient(circle at 50% 105%, rgba(201,242,223,.65), transparent 28rem),
+        linear-gradient(135deg, var(--bg), var(--bg-2));
+      min-height: 100vh;
+    }
+
+    button, input { font: inherit; }
+    .shell { max-width: var(--max); margin: 0 auto; padding: 22px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      padding: clamp(22px, 4vw, 42px);
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,231,240,.88));
+      box-shadow: var(--shadow);
+    }
+    .hero:after {
+      content: "✈️ 🌸 🧳 📸 🍜";
+      position: absolute;
+      right: clamp(12px, 3vw, 36px);
+      bottom: 12px;
+      font-size: clamp(30px, 7vw, 72px);
+      opacity: .18;
+      letter-spacing: .08em;
+      pointer-events: none;
+    }
+    .eyebrow { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.7);
+      padding: 7px 11px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    h1, h2, h3 { line-height: 1.15; margin: 0; }
+    h1 { max-width: 760px; font-size: clamp(32px, 7vw, 70px); letter-spacing: -.05em; }
+    .subtitle { max-width: 760px; margin: 16px 0 0; color: var(--muted); font-size: clamp(16px, 2vw, 20px); }
+    .top-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .action-btn, .tab-btn {
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 800;
+      color: var(--ink);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .action-btn { padding: 11px 16px; background: var(--ink); color: white; box-shadow: 0 10px 20px rgba(62,51,64,.17); }
+    .action-btn.secondary { background: white; color: var(--ink); border: 1px solid var(--line); }
+    .action-btn:hover, .tab-btn:hover { transform: translateY(-1px); }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: 18px 0;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 10px 26px rgba(112,78,106,.10);
+      backdrop-filter: blur(12px);
+    }
+    .search-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-bottom: 10px; }
+    #searchInput {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 13px 17px;
+      background: white;
+      outline: none;
+    }
+    #searchInput:focus { border-color: #ff8fbd; box-shadow: 0 0 0 4px rgba(255,199,221,.45); }
+    .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+    .tab-btn { flex: 0 0 auto; padding: 10px 14px; background: var(--pink-2); border: 1px solid transparent; }
+    .tab-btn[aria-selected="true"] { background: linear-gradient(135deg, var(--pink), var(--lav)); border-color: rgba(62,51,64,.12); box-shadow: 0 8px 18px rgba(255,143,189,.25); }
+
+    .tab-panel { display: none; animation: fade .22s ease; }
+    .tab-panel.active { display: block; }
+    @keyframes fade { from { opacity: .5; transform: translateY(4px);} to {opacity: 1; transform: none;} }
+
+    .grid { display: grid; gap: 16px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card, .day-card, .section-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h3, .section-card h2, .day-card h2 { margin-bottom: 10px; }
+    .section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 12px; }
+    .section-title h2 { font-size: clamp(22px, 3vw, 34px); letter-spacing: -.03em; }
+    .kpi { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .kpi .card { padding: 16px; background: linear-gradient(135deg, white, var(--pink-2)); }
+    .kpi strong { display: block; font-size: 22px; }
+    .muted { color: var(--muted); }
+    .small { font-size: 13px; }
+    .tag { display: inline-flex; border-radius: 999px; padding: 4px 9px; font-size: 12px; font-weight: 900; margin: 3px 4px 3px 0; background: var(--sky); }
+    .tag.paid { background: var(--mint); }
+    .tag.due { background: var(--yellow); }
+    .tag.cash { background: var(--peach); }
+    .tag.booked { background: var(--lav); }
+
+    .time-block {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 12px;
+      padding: 11px 0;
+      border-top: 1px dashed var(--line);
+    }
+    .time { font-weight: 900; color: #9c5175; }
+    .reminder {
+      margin-top: 14px;
+      border: 1px dashed rgba(156,81,117,.35);
+      border-radius: 18px;
+      padding: 14px;
+      background: linear-gradient(135deg, rgba(255,231,240,.8), rgba(255,240,184,.55));
+    }
+    ul.clean { padding-left: 1.15rem; margin: 8px 0 0; }
+    .checklist { display: grid; gap: 8px; }
+    .check-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255,255,255,.65);
+    }
+    .check-item input { width: 18px; height: 18px; margin-top: 2px; accent-color: #ff8fbd; }
+    .check-item.done span { color: var(--muted); text-decoration: line-through; }
+
+    .table-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--line); background: white; }
+    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: var(--pink-2); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
+    tr:last-child td { border-bottom: 0; }
+    .contact-line { display: grid; gap: 4px; }
+    .hidden-by-search { display: none !important; }
+    .empty-state { display: none; margin: 22px 0; padding: 22px; text-align: center; border: 1px dashed var(--line); border-radius: var(--radius); background: rgba(255,255,255,.75); }
+    .empty-state.show { display: block; }
+
+    @media (max-width: 820px) {
+      .shell { padding: 13px; }
+      .grid.two, .grid.three, .kpi { grid-template-columns: 1fr; }
+      .time-block { grid-template-columns: 1fr; gap: 2px; }
+      .search-row { grid-template-columns: 1fr; }
+      .toolbar { border-radius: 20px; }
+      .card, .day-card, .section-card { padding: 15px; }
+    }
+
+    @media print {
+      body { background: white; color: #222; font-size: 11.5pt; }
+      .shell { max-width: none; padding: 0; }
+      .toolbar, .top-actions, .empty-state { display: none !important; }
+      .hero, .card, .day-card, .section-card { box-shadow: none; break-inside: avoid; border-color: #ddd; background: white; }
+      .hero { padding: 18px; margin-bottom: 12px; }
+      .hero:after { display: none; }
+      .tab-panel { display: block !important; page-break-before: always; }
+      .tab-panel:first-of-type { page-break-before: auto; }
+      .section-title { margin-top: 12px; }
+      .grid.two, .grid.three, .kpi { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      a { color: inherit; text-decoration: none; }
+      table { min-width: 0; font-size: 9.5pt; }
+      th, td { padding: 7px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero searchable" data-search-label="Project title overview Kyla birthday Vietnam workation trip">
+      <div class="eyebrow">
+        <span class="pill">🌸 Vietnam 2026</span>
+        <span class="pill">🎂 Birthday trip</span>
+        <span class="pill">💻 Private workation planner</span>
+        <span class="pill">🖨️ Print/PDF ready</span>
+      </div>
+      <h1>Kyla’s 24th Birthday Workation — Vietnam 2026</h1>
+      <p class="subtitle">A fully offline travel planner dashboard for Kyla Nicole Rabi and James Benedict Santos, June 10–18, 2026: Ho Chi Minh City, Sapa, Hanoi, and Mui Ne.</p>
+      <div class="top-actions">
+        <button class="action-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <button class="action-btn secondary" id="resetChecks">↺ Reset saved checkboxes</button>
+      </div>
+    </header>
+
+    <nav class="toolbar" aria-label="Planner navigation">
+      <div class="search-row">
+        <input id="searchInput" type="search" placeholder="🔎 Search all tabs: flight, hotel, outfit, cash, booking ID..." aria-label="Search all content" />
+        <button class="action-btn secondary" id="clearSearch">Clear</button>
+      </div>
+      <div class="tabs" id="tabs" role="tablist"></div>
+    </nav>
+
+    <main id="app"></main>
+    <div class="empty-state" id="emptyState">No matching cards found. Try searching a city, date, booking code, or activity. 💗</div>
+  </div>
+
+  <script>
+    const trip = {
+      title: "Kyla’s 24th Birthday Workation — Vietnam 2026",
+      travelers: ["Kyla Nicole Rabi", "James Benedict Santos"],
+      dates: "June 10–18, 2026",
+      purpose: "Tourism / birthday trip",
+      cities: "Vietnam — Ho Chi Minh City, Sapa, Hanoi, Mui Ne",
+      workShift: "2:30 AM–10:00 AM Vietnam time / 3:30 AM–11:00 AM Philippine time",
+      flights: [
+        { airline: "Cebu Pacific", flight: "5J751", route: "MNL to SGN", depart: "June 10, 2026, 10:10 PM — Manila NAIA Terminal 3", arrive: "June 11, 2026, 12:05 AM — Ho Chi Minh / Tan Son Nhat Terminal 2", baggage: "Kyla 20kg checked + 7kg carry-on; James 20kg checked + 7kg carry-on" },
+        { airline: "VietJet", flight: "VJ142", route: "SGN to HAN", depart: "June 12, 2026, 1:20 PM — Tan Son Nhat Domestic Terminal 1", arrive: "June 12, 2026, 3:30 PM — Hanoi / Noi Bai", baggage: "Kyla 20kg checked + 7kg carry-on; James 7kg carry-on" },
+        { airline: "VietJet", flight: "VJ167", route: "HAN to SGN", depart: "June 15, 2026, 10:45 PM — Hanoi / Noi Bai", arrive: "June 16, 2026, 12:55 AM — Ho Chi Minh / Tan Son Nhat Domestic Terminal 1", booking: "7VQ677", baggage: "Kyla 20kg checked + 7kg carry-on; James 7kg carry-on", note: "VietJet email reconfirmed this flight number and time." },
+        { airline: "Cebu Pacific", flight: "5J754", route: "SGN to MNL", depart: "June 17, 2026, 9:50 PM — Ho Chi Minh / Tan Son Nhat Terminal 2", arrive: "June 18, 2026, 1:45 AM — Manila NAIA Terminal 3", baggage: "Kyla 40kg checked + 7kg carry-on; James 20kg checked + 7kg carry-on" }
+      ],
+      hotels: [
+        { name: "Felix Hotel Saigon", address: "219/8A Phạm Ngũ Lão, District 1, Ho Chi Minh City", stay: "June 10–12, 2026", checkin: "June 10, 2:00 PM", checkout: "June 12, 12:00 PM", contact: "+84 868 036 299", notes: "Wi‑Fi okay, desk in room, luggage storage until 11 PM same checkout day.", breakfast: "Not confirmed" },
+        { name: "Sapa CatCat Hills Resort & Spa", address: "86 Fansipan, Sapa, Lao Cai, Vietnam", stay: "June 12–14, 2026", checkin: "June 12, 2:00 PM", checkout: "June 14, 12:00 PM", contact: "+84 2143 779 789", whatsapp: "+84 819 268 668", notes: "24/7 reception, late check-in okay, Wi‑Fi okay for calls, luggage storage after checkout available.", breakfast: "Included" },
+        { name: "Royal Holiday Hanoi Hotel", address: "19 Hàng Hành, Hoan Kiem District, Hanoi", stay: "June 14–15, 2026", checkin: "June 14, 2:00 PM", checkout: "June 15, 12:00 PM", booking: "1726590471", reference: "17710", contact: "+84 243 938 0433", whatsapp: "+84 946 883 179", manager: "+84 946 489 179", notes: "Room will be kept for early arrival, luggage storage after checkout available.", breakfast: "Included" },
+        { name: "Anket De’ River Mũi Né Resort", address: "50 Huỳnh Thúc Kháng, Phường Mũi Né, Phan Thiết, Vietnam", stay: "June 16–17, 2026", checkin: "June 16, 3:00 PM", checkout: "June 17, 12:00 PM", booking: "1726593044", contact: "+84 922 192 929", notes: "Birthday note sent, early check-in requested, late checkout requested, lower floor/view request sent.", breakfast: "Included" }
+      ],
+      bookings: [
+        { name: "G8 Open Tour Cabin Sleeper Bus", icon: "🚌", details: ["Route: Noi Bai Airport to Sapa", "Date/time: June 12, 2026, 5:45 PM", "Pickup: Noi Bai Domestic Terminal, Floor 1, Gate E1", "Drop-off: Sapa / hotel shuttle", "Booking reference: KBP240013", "Contact: +84 382 995 611 / +84 358 482 611", "Cabins: 1 upper single cabin + 1 lower single cabin", "Includes: USB sockets, Wi‑Fi onboard, blanket"] },
+        { name: "HK Buslines 24-Cabin Sleeping Bus", icon: "🌙", details: ["Route: Sapa to Hanoi Old Quarter", "Date/time: June 14, 2026, 10:00 PM", "Pickup: Sapa CatCat Hills Resort & Spa", "Drop-off: Hanoi Old Quarter / Royal Holiday Hanoi Hotel area", "Cabins: 2 lower single cabins", "Booking reference: to be added later"] },
+        { name: "Ho Chi Minh City Motorbike Street Food Tour", icon: "🍜", details: ["Date: June 11, 2026 evening", "Pickup/drop-off: Felix Hotel", "Dietary note: no raw food, no exotic food, no extremely spicy food", "Booking reference: to be added later"] },
+        { name: "4RAU Barber Deluxe", icon: "💈", details: ["Date: June 11, 2026", "Target time: around 12:30 PM–1:00 PM", "Address: 59 Đồng Du, Bến Nghé, District 1, Ho Chi Minh City", "Package: Combo 1 — Haircut + Shampoo + Pomade Styling + Blowdry", "Instruction: Korean soft two-block with curtain fringe; stylist may adjust. Please teach quick styling.", "Booking reference: to be added later"] },
+        { name: "Vietnam Car Service / Mui Ne Jeep Tour", icon: "🚙", details: ["Contact: +84 93 302 18 39", "Line ID: vietnamcarservice", "HCMC Airport to Mui Ne private car: June 16 after 12:55 AM arrival, pickup around 1:30–2:00 AM", "Mui Ne to SGN Terminal 2 private car: June 17, pickup 2:30 PM", "Recommended vehicle: 7-seater because only 100,000 VND more than 4-seater", "Mui Ne Private Jeep Sunset Tour: June 16, 2:00 PM–6:00 PM", "Price: 600,000 VND for 2 people private jeep", "Includes: private jeep, driver, gasoline, parking fees", "Excludes: ATV/jeep inside White Sand Dunes, paid onsite", "Route: skip Fairy Stream; focus on White Sand Dunes, ATV, yellow truck/photo road, Red Sand Dunes, beach road, Fishing Village if time allows"] }
+      ],
+      beforeFlight: [
+        { date: "June 8", label: "2 days before flight", items: ["Lay out outfits: airport, Saigon shopping, food tour, Sapa, Cat Cat base outfit, Ba Vi shoot, Mui Ne birthday, bikini, dunes outfit, return outfit", "Test shoes/boots/sandals; pack extra socks", "Prepare beauty/glam kit", "Prepare immigration folder: passport, flights, hotels, Klook vouchers, clean tourist itinerary, proof of funds, HR COE/remote work authorization, boyfriend’s COE/leave approval/company ID, travel insurance", "Screenshot all apps/bookings", "Confirm pocket Wi‑Fi/eSIM/local SIM", "Exchange starter VND if rate is okay", "Confirm G8, HK Buslines, Mui Ne car/jeep, Ba Vi photographer/team, 4RAU barber, luggage storage", "Finalize Google Maps lists"] },
+        { date: "June 9", label: "1 day before flight", items: ["Check Cebu Pacific booking, baggage, terminal, seats, online check-in if available", "Fill Vietnam Pre-Arrival Form for both travelers and save QR codes", "Create phone album: VIETNAM IMMIGRATION + BOOKINGS", "Pack airport bag", "Save Felix Hotel address/contact and screenshot confirmations", "Final luggage weight check"] },
+        { date: "June 10", label: "Flight day checklist", items: ["Target arrival at NAIA Terminal 3 around 6:00–6:30 PM", "Before leaving home: passport, phone, wallet, cards, cash, power bank, laptop, chargers, screenshots, luggage locks", "At NAIA: check-in, bag drop, immigration, security", "Before boarding / before landing HCMC: verify Vietnam Pre-Arrival QR saved", "Arrival-ready info: Felix Hotel address, return flight, hotel booking, clean itinerary, pre-arrival QR"] }
+      ],
+      dailyReminder: ["charge phone, laptop, camera, power bank, pocket Wi‑Fi", "prep tomorrow’s clothes", "pack tomorrow’s mini bag", "screenshot tomorrow’s addresses/vouchers", "set alarms", "prep work setup if there is work next morning", "check if breakfast is included tomorrow", "note any transport or schedule confirmation needed"],
+      itinerary: [
+        { date: "June 10", city: "Manila → Ho Chi Minh City", emoji: "✈️", hotel: "Overnight flight / arrival toward Felix Hotel", blocks: [["5:00–6:00 PM", "Final prep at home"], ["6:00–6:30 PM", "Leave for NAIA Terminal 3"], ["6:30–8:30 PM", "Check-in, bag drop, immigration, security"], ["8:30–9:30 PM", "Food/rest, lounge optional"], ["10:10 PM", "Cebu Pacific 5J751 flight MNL to SGN"]] },
+        { date: "June 11", city: "Ho Chi Minh City", emoji: "🛍️", hotel: "Felix Hotel Saigon — Wi‑Fi okay, desk in room, breakfast not confirmed", blocks: [["12:05 AM", "Arrive SGN Terminal 2"], ["12:45–1:30 AM", "Immigration + baggage"], ["1:30–2:15 AM", "Grab to Felix Hotel"], ["2:30–10:00 AM", "Work shift"], ["10:00–11:30 AM", "Reset + brunch"], ["11:30 AM–3:30 PM", "Saigon shopping marathon"], ["12:30–2:00 PM", "Boyfriend haircut at 4RAU while Kyla shops nearby"], ["3:30–4:15 PM", "Return Felix, drop shopping bags"], ["4:15–5:15 PM", "Quick photo stop or rest"], ["5:15–5:50 PM", "Refresh for food tour"], ["6:00–10:00 PM", "Motorbike street food tour"], ["10:30–11:00 PM", "Shower, pack, charge"], ["11:00 PM", "Sleep"]] },
+        { date: "June 12", city: "Ho Chi Minh City → Hanoi → Sapa", emoji: "🚌", hotel: "Felix checkout + G8 sleeper bus to Sapa CatCat Hills", blocks: [["2:30–10:00 AM", "Work shift"], ["10:00–11:00 AM", "Pack + checkout prep"], ["11:00 AM", "Checkout Felix Hotel"], ["11:30 AM–12:00 NN", "Grab to SGN Domestic Terminal"], ["12:00–1:00 PM", "Airport lunch/snack"], ["1:20 PM", "VietJet VJ142 SGN to HAN"], ["3:30 PM", "Arrive Noi Bai Airport"], ["3:30–5:15 PM", "Airport buffer"], ["5:15 PM", "Go to G8 pickup point, Domestic Terminal Floor 1 Gate E1"], ["5:45 PM", "G8 cabin sleeper bus to Sapa"]] },
+        { date: "June 13", city: "Sapa / Cat Cat Village", emoji: "🏔️", hotel: "Sapa CatCat Hills — breakfast included, Wi‑Fi okay, 24/7 reception", blocks: [["12:00–2:00 AM", "Possible Sapa arrival"], ["Arrival", "Check in at Sapa CatCat Hills"], ["2:30–10:00 AM", "Work shift"], ["10:00 AM–12:00 NN", "Recovery sleep"], ["12:00–1:00 PM", "Lunch"], ["1:00–1:30 PM", "Glam prep"], ["1:30–6:00 PM", "Cat Cat Village content block: costume rental, village walk, waterfall/bridge shots, rainbow slide, drone/rainbow slide if available"], ["6:00–7:00 PM", "Return hotel/rest"], ["7:30–8:30 PM", "Dinner in Sapa town"], ["9:30–10:00 PM", "Sleep"]] },
+        { date: "June 14", city: "Sapa → Hanoi", emoji: "🌈", hotel: "Sapa CatCat checkout; Royal Holiday Hanoi room kept for early arrival", blocks: [["2:30–10:00 AM", "Work shift"], ["10:00–11:00 AM", "Breakfast + pack"], ["11:00–12:00 NN", "Checkout + luggage storage"], ["12:00–1:00 PM", "Lunch near Sun Plaza / Sapa Station"], ["Afternoon", "Weather-based route — Priority: Green Valley / Alpine Coaster / Rainbow Bridge"], ["If clear", "Fansipan + Muong Hoa + Green Valley + Moana"], ["If foggy", "Green Valley + Moana + Glass Bridge/Heaven Gate"], ["5:30–7:00 PM", "Dinner + retrieve luggage"], ["8:45–9:15 PM", "Ready for HK Buslines pickup"], ["10:00 PM", "HK Buslines Sapa to Hanoi"]] },
+        { date: "June 15", city: "Hanoi / Ba Vi / Train Street", emoji: "📸", hotel: "Royal Holiday Hanoi — breakfast included, luggage storage after checkout", blocks: [["4:00–5:00 AM", "Arrive Hanoi"], ["4:30 AM", "Go to Royal Holiday Hanoi Hotel"], ["4:30–8:00 AM", "Work + breakfast + shower rotation"], ["Morning task", "Check Train Street schedule first thing and message Train Street cafés. Target train: 7:10 PM or 7:50 PM"], ["8:00–8:30 AM", "Pack + leave big luggage at Royal Holiday storage"], ["8:30–9:00 AM", "Grab to Mira Guitar Class / Mira Studio"], ["9:00 AM–12:00 NN", "Glam team / dress-up"], ["12:00–12:30 PM", "Quick lunch/snack"], ["12:30–1:30/2:00 PM", "Travel to Ba Vi with photographer/team if possible"], ["1:30/2:00–5:00 PM", "Ba Vi photoshoot: Old Church Ruins, Pine Forest, mossy walls, forest road"], ["5:00–6:30 PM", "Ba Vi to Hanoi / Train Street area"], ["6:30–7:00 PM", "Quick dinner/snack"], ["7:00–8:00 PM", "Train Street Café — preferred: Train Street Coffee 69; backups: Hanoi Train Track Café, Nam Vy Coffee, Coffee 90 Train Street"], ["8:00 PM sharp", "Leave for airport or hotel luggage pickup first"], ["10:45 PM", "VietJet VJ167 HAN to SGN"], ["12:55 AM June 16", "Arrive SGN Terminal 1"]] },
+        { date: "June 16", city: "Ho Chi Minh City → Mui Ne", emoji: "🎂", hotel: "Anket De’ River Mũi Né Resort — breakfast included; birthday note and requests sent", blocks: [["1:30–2:00 AM", "Private car pickup from SGN to Mui Ne"], ["2:00–6:30 AM", "Sleep in car"], ["6:00–7:00 AM", "Arrive Anket De’ River Resort"], ["7:00–11:00 AM", "Recovery sleep / resort rest"], ["11:00 AM–1:00 PM", "Birthday brunch + glam prep"], ["1:00–1:45 PM", "Resort/pool content"], ["1:45 PM", "Prepare for dunes"], ["2:00–6:00 PM", "Private Mui Ne Jeep Sunset Tour"], ["6:30–7:30 PM", "Return resort / shower"], ["7:30 PM onward", "Birthday dinner"]] },
+        { date: "June 17", city: "Mui Ne → Ho Chi Minh City → Manila", emoji: "🧳", hotel: "Anket checkout + SGN Terminal 2 departure", blocks: [["2:30–10:00 AM", "Final work shift abroad"], ["10:00–11:30 AM", "Fairy Stream removed; use time for resort photos, packing, rest, final shower"], ["11:30 AM–12:00 NN", "Checkout prep"], ["12:00–1:30 PM", "Lunch + final packing"], ["2:30 PM", "Private car Mui Ne to SGN Airport Terminal 2"], ["Optional on route", "Lotte Mart / supermarket stop only if traffic is okay and driver agrees"], ["7:00–7:30 PM", "Arrive SGN Terminal 2"], ["Airport", "Check-in, VAT refund if applicable, immigration, security"], ["9:50 PM", "Cebu Pacific 5J754 SGN to MNL"], ["1:45 AM June 18", "Arrive Manila"]] }
+      ],
+      shopping: {
+        style: "Unique fits, ulzzang, sweet, chic, dresses, streetstyle, statement pieces. Avoid basic/plain pieces unless practical.",
+        clusters: ["District 1 core: The New Playground, ONON Made, Enuff Studio, Naked by V, Huula, Bunny Hill Concept, Darlingism, LSoul, Flane, Rechic, Rubies, L’Espoir, Viery Studios", "Bikini/corset cluster: LACE, Sissy Nation", "Shoes: Better Shoes", "Souvenirs/luggage: Ha’s Souvenir Shop, Tired City, Collective Memory"],
+        outfits: ["Airport", "Saigon shopping", "Food tour", "Sapa", "Cat Cat base outfit", "Ba Vi shoot", "Mui Ne birthday", "Bikini", "Dunes outfit", "Return outfit"]
+      },
+      miniBagBase: ["Power bank", "Phone strap", "VND cash", "1–2 cards", "Passport copy", "Tissue/wipes", "Lipstick/powder", "Sunscreen", "Medicine/motion sickness meds", "Umbrella/raincoat", "Water", "Safety pins", "Hair tie/clip", "Extra socks"],
+      miniBagDays: [
+        { day: "Jun 11", label: "Saigon shopping + food tour", items: ["Small bag", "Foldable tote", "Comfy shoes", "Makeup retouch"] },
+        { day: "Jun 13", label: "Cat Cat", items: ["Cash", "Comfy shoes", "Wipes", "Lipstick/powder", "Hair clip", "Jacket/scarf"] },
+        { day: "Jun 14", label: "Sapa", items: ["Jacket", "Raincoat/umbrella", "Cash", "Motion sickness meds"] },
+        { day: "Jun 15", label: "Ba Vi", items: ["Shoot outfit items", "Backup slippers", "Mosquito repellent", "Safety pins", "Water", "Makeup retouch"] },
+        { day: "Jun 16", label: "Dunes", items: ["1.8M–2.2M VND safe cash", "Sunglasses", "Scarf", "Water", "Phone strap", "Sand-friendly shoes"] },
+        { day: "Jun 17", label: "Flight", items: ["Passport", "Tickets/screenshots", "VAT receipts/items if claiming", "Power bank", "Snacks", "Return outfit"] }
+      ],
+      expenses: [
+        ["Felix Hotel", "Hotel", "—", "Paid", ""], ["Sapa CatCat Hills", "Hotel", "—", "Booked/Confirmed", ""], ["Royal Holiday Hanoi", "Hotel", "—", "Paid", "Booking ID 1726590471"], ["Anket De’ River", "Hotel", "₱6,882.17", "Paid", "Booking ID 1726593044"], ["G8 Bus", "Transfer", "₱2,332.10", "Paid", "KBP240013"], ["HK Bus", "Transfer", "—", "Booked", ""], ["Saigon food tour", "Activity", "—", "Booked", ""], ["4RAU Barber", "Activity", "—", "Booked", ""], ["Private car HCMC to Mui Ne", "Transfer", "Estimated 1.6M VND for 7-seater", "Cash on arrival", ""], ["Private car Mui Ne to SGN", "Transfer", "Estimated 1.6M VND for 7-seater", "Cash on arrival", ""], ["Mui Ne Jeep Tour", "Activity", "600k VND", "Cash on arrival", ""], ["White Sand Dunes ATV extra", "Activity", "Prepare 800k–1.2M VND", "Pay onsite", ""], ["Pocket Wi‑Fi/eSIM", "Connectivity", "—", "Not yet", ""], ["Saigon luggage storage", "Logistics", "—", "Not yet", ""], ["Ba Vi transport/photoshoot logistics", "Logistics", "—", "Not yet", ""], ["Camera rental before trip", "Gear", "—", "Not yet", ""], ["Shopping haul", "Shopping", "—", "Not yet", ""], ["Food cash buffer", "Food", "—", "Not yet", ""]
+      ],
+      finalize: ["Pocket Wi‑Fi + eSIM/local SIM", "Saigon luggage storage/delivery for shopping haul", "Jun 17 Mui Ne to SGN private car final confirmation", "Ba Vi transport with photographer/team", "Train Street schedule/café confirmation on Jun 15 morning", "Sapa Jun 14 weather-based route", "Cat Cat costume/rainbow slide/drone onsite", "Camera rental before travel date", "HR/immigration documents", "Vietnam Pre-Arrival Form QR", "Checklist to bring to follow"],
+      immigrationAnswer: "I am traveling to Vietnam for tourism and my birthday trip with my boyfriend. We will visit Ho Chi Minh City, Sapa, Hanoi, and Mui Ne. We have confirmed flights, hotels, local transfers, and a confirmed return flight to Manila on June 17, 2026."
+    };
+
+    const tabs = [
+      ["overview", "🌸 Overview"], ["before", "✅ Before Flight Checklist"], ["itinerary", "🗓️ Full Detailed Itinerary"], ["immigration", "🛂 Immigration Itinerary"], ["booked", "🎟️ Booked / Confirmed"], ["contacts", "☎️ Contacts"], ["places", "👗 Places + Outfits"], ["expenses", "💸 Expenses"], ["minibag", "🎒 Daily Mini Bag"], ["finalize", "📌 Things To Finalize"]
+    ];
+
+    const app = document.getElementById("app");
+    const escapeHtml = (s) => String(s ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
+    const list = (items, cls = "clean") => `<ul class="${cls}">${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+    const details = (pairs) => pairs.filter(([,v]) => v).map(([k,v]) => `<p><strong>${escapeHtml(k)}:</strong> ${escapeHtml(v)}</p>`).join("");
+    const checkboxList = (prefix, items) => `<div class="checklist">${items.map((item, i) => `<label class="check-item searchable" data-search-label="${escapeHtml(item)}"><input type="checkbox" data-check-id="${escapeHtml(prefix)}-${i}"><span>${escapeHtml(item)}</span></label>`).join("")}</div>`;
+    const statusTag = (status) => {
+      const s = status.toLowerCase();
+      const cls = s.includes("paid") ? "paid" : s.includes("cash") ? "cash" : s.includes("not") || s.includes("onsite") ? "due" : "booked";
+      return `<span class="tag ${cls}">${escapeHtml(status)}</span>`;
+    };
+
+    function render() {
+      document.getElementById("tabs").innerHTML = tabs.map(([id, label], i) => `<button class="tab-btn" role="tab" id="tab-${id}" aria-controls="panel-${id}" aria-selected="${i === 0}" data-tab="${id}">${label}</button>`).join("");
+      app.innerHTML = tabs.map(([id]) => `<section class="tab-panel ${id === "overview" ? "active" : ""}" id="panel-${id}" role="tabpanel" aria-labelledby="tab-${id}">${renderPanel(id)}</section>`).join("");
+      restoreChecks();
+    }
+
+    function renderPanel(id) {
+      if (id === "overview") return `
+        <div class="kpi searchable"><div class="card"><span class="muted">👥 Travelers</span><strong>${trip.travelers.length}</strong><p>${trip.travelers.join(" + ")}</p></div><div class="card"><span class="muted">📅 Dates</span><strong>${trip.dates}</strong><p>${trip.purpose}</p></div><div class="card"><span class="muted">📍 Cities</span><strong>4 stops</strong><p>${trip.cities}</p></div><div class="card"><span class="muted">💻 Private note</span><strong>Work shift</strong><p>${trip.workShift}</p></div></div>
+        <div class="section-title"><h2>✈️ Flight Snapshot</h2></div><div class="grid two">${trip.flights.map(f => `<article class="card searchable"><h3>${f.airline} ${f.flight}</h3><p class="tag">${f.route}</p>${details([["Departure", f.depart], ["Arrival", f.arrive], ["Booking", f.booking], ["Baggage", f.baggage], ["Note", f.note]])}</article>`).join("")}</div>
+        <div class="section-title"><h2>🏨 Hotel Snapshot</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${details([["Address", h.address], ["Stay", h.stay], ["Check-in", h.checkin], ["Check-out", h.checkout], ["Breakfast", h.breakfast], ["Notes", h.notes]])}</article>`).join("")}</div>`;
+      if (id === "before") return `<div class="section-title"><h2>✅ Preparation Checklist</h2><span class="pill">Saves offline in this browser</span></div><div class="grid">${trip.beforeFlight.map((d, i) => `<article class="section-card searchable"><h2>${d.date} — ${d.label}</h2>${checkboxList(`before-${i}`, d.items)}</article>`).join("")}</div>`;
+      if (id === "itinerary") return `<div class="section-title"><h2>🗓️ Full Detailed Itinerary</h2><span class="pill">Includes private work notes</span></div><div class="grid">${trip.itinerary.map((d, i) => `<article class="day-card searchable"><h2>${d.emoji} ${d.date} — ${d.city}</h2><p class="pill">🏨 Daily hotel routine: ${escapeHtml(d.hotel)}</p>${d.blocks.map(([time, text]) => `<div class="time-block"><div class="time">${escapeHtml(time)}</div><div>${escapeHtml(text)}</div></div>`).join("")}<div class="reminder"><h3>🌙 Final Reminder of the Day</h3>${checkboxList(`reminder-${i}`, trip.dailyReminder)}</div></article>`).join("")}</div>`;
+      if (id === "immigration") return `<article class="section-card searchable"><h2>🛂 Clean Immigration-Friendly Itinerary</h2><p class="pill">No workation details in this section</p>${details([["Purpose", trip.purpose], ["Travelers", trip.travelers.join(" and ")], ["Travel dates", trip.dates], ["Cities", "Ho Chi Minh City, Sapa, Hanoi, Mui Ne"]])}<h3>Short answer if asked</h3><p class="reminder">“${escapeHtml(trip.immigrationAnswer)}”</p></article><div class="section-title"><h2>✈️ Flights</h2></div><div class="grid two">${trip.flights.map(f => `<article class="card searchable"><h3>${f.airline} ${f.flight} — ${f.route}</h3>${details([["Departure", f.depart], ["Arrival", f.arrive], ["Booking", f.booking], ["Baggage", f.baggage]])}</article>`).join("")}</div><div class="section-title"><h2>🏨 Hotels + selected contacts</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${details([["Address", h.address], ["Stay", h.stay], ["Booking ID", h.booking], ["Hotel reference", h.reference], ["Contact", h.contact]])}</article>`).join("")}</div><div class="section-title"><h2>🎟️ Major booking references</h2></div><div class="grid two">${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${list(b.details.filter(x => /booking|reference|route|date|pickup|contact/i.test(x)))}</article>`).join("")}</div>`;
+      if (id === "booked") return `<div class="section-title"><h2>🎟️ Booked / Confirmed</h2></div><div class="grid two">${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${list(b.details)}</article>`).join("")}</div>`;
+      if (id === "contacts") return `<div class="section-title"><h2>☎️ Contacts + Booking Details</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>🏨 ${h.name}</h3><div class="contact-line">${details([["Address", h.address], ["Contact", h.contact], ["WhatsApp/Zalo/Viber", h.whatsapp], ["Manager", h.manager], ["Booking ID", h.booking], ["Hotel reference", h.reference], ["Confirmed notes", h.notes]])}</div></article>`).join("")}${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${list(b.details)}</article>`).join("")}</div>`;
+      if (id === "places") return `<div class="grid two"><article class="section-card searchable"><h2>👗 Style Preference</h2><p>${escapeHtml(trip.shopping.style)}</p><h3>Outfit packing list</h3>${checkboxList("outfits", trip.shopping.outfits)}</article><article class="section-card searchable"><h2>🛍️ Shopping Clusters</h2>${list(trip.shopping.clusters)}<h3>Photo/place notes</h3>${list(["Cat Cat Village: costume rental, village walk, waterfall/bridge shots, rainbow slide, drone/rainbow slide if available", "Sapa route: Green Valley / Alpine Coaster / Rainbow Bridge; clear-day Fansipan option; foggy-day Glass Bridge/Heaven Gate option", "Ba Vi: Old Church Ruins, Pine Forest, mossy walls, forest road", "Train Street: preferred Train Street Coffee 69; backups Hanoi Train Track Café, Nam Vy Coffee, Coffee 90 Train Street", "Mui Ne dunes: White Sand Dunes, ATV, yellow truck/photo road, Red Sand Dunes, beach road, Fishing Village if time allows"])} </article></div>`;
+      if (id === "expenses") return `<div class="section-title"><h2>💸 Expense Tracker</h2><span class="pill">Paid / Not Yet / Cash On Arrival</span></div><div class="table-wrap searchable"><table><thead><tr><th>Item</th><th>Category</th><th>Estimated/Actual Cost</th><th>Paid Status</th><th>Notes</th></tr></thead><tbody>${trip.expenses.map(r => `<tr><td>${escapeHtml(r[0])}</td><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td><td>${statusTag(r[3])}</td><td>${escapeHtml(r[4])}</td></tr>`).join("")}</tbody></table></div>`;
+      if (id === "minibag") return `<div class="grid two"><article class="section-card searchable"><h2>🎒 Base Mini Bag Items</h2>${checkboxList("mini-base", trip.miniBagBase)}</article><article class="section-card searchable"><h2>💡 Mini Bag Rule</h2><p>Pack base items first, then add the day-specific card items. Screenshot vouchers and addresses before leaving Wi‑Fi.</p></article></div><div class="section-title"><h2>Day-specific Mini Bags</h2></div><div class="grid two">${trip.miniBagDays.map((d, i) => `<article class="card searchable"><h3>${d.day} — ${d.label}</h3>${checkboxList(`mini-day-${i}`, d.items)}</article>`).join("")}</div>`;
+      if (id === "finalize") return `<div class="section-title"><h2>📌 Things To Finalize</h2><span class="pill">Last-mile confirmations</span></div><article class="section-card searchable">${checkboxList("finalize", trip.finalize)}</article>`;
+      return "";
+    }
+
+    function restoreChecks() {
+      document.querySelectorAll("[data-check-id]").forEach(box => {
+        const key = `vietnam2026:${box.dataset.checkId}`;
+        box.checked = localStorage.getItem(key) === "1";
+        box.closest(".check-item").classList.toggle("done", box.checked);
+        box.addEventListener("change", () => {
+          localStorage.setItem(key, box.checked ? "1" : "0");
+          box.closest(".check-item").classList.toggle("done", box.checked);
+        });
+      });
+    }
+
+    function switchTab(id) {
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.setAttribute("aria-selected", btn.dataset.tab === id));
+      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.toggle("active", panel.id === `panel-${id}`));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function applySearch() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      const items = document.querySelectorAll(".searchable");
+      let visible = 0;
+      if (!q) {
+        items.forEach(el => el.classList.remove("hidden-by-search"));
+        document.getElementById("emptyState").classList.remove("show");
+        return;
+      }
+      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.add("active"));
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.setAttribute("aria-selected", "false"));
+      items.forEach(el => {
+        const hay = `${el.textContent} ${el.dataset.searchLabel || ""}`.toLowerCase();
+        const match = hay.includes(q);
+        el.classList.toggle("hidden-by-search", !match);
+        if (match) visible++;
+      });
+      document.getElementById("emptyState").classList.toggle("show", visible === 0);
+    }
+
+    render();
+    document.getElementById("tabs").addEventListener("click", e => { const btn = e.target.closest(".tab-btn"); if (btn) { document.getElementById("searchInput").value = ""; applySearch(); switchTab(btn.dataset.tab); } });
+    document.getElementById("searchInput").addEventListener("input", applySearch);
+    document.getElementById("clearSearch").addEventListener("click", () => { document.getElementById("searchInput").value = ""; applySearch(); switchTab("overview"); });
+    document.getElementById("resetChecks").addEventListener("click", () => { if (confirm("Reset all saved checklist ticks for this planner?")) { Object.keys(localStorage).filter(k => k.startsWith("vietnam2026:")).forEach(k => localStorage.removeItem(k)); document.querySelectorAll("[data-check-id]").forEach(box => { box.checked = false; box.closest(".check-item").classList.remove("done"); }); } });
+  </script>
+</body>
+</html>

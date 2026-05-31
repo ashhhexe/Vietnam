@@ -23,6 +23,9 @@
       --radius: 18px;
       --radius-sm: 13px;
       --bottom-nav-height: 74px;
+      --header-z: 10;
+      --bottom-nav-z: 20;
+      --floating-z: 30;
     }
 
     html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
@@ -54,6 +57,7 @@
     .app { width: 100%; max-width: 980px; margin: 0 auto; padding: 10px 10px 0; }
     .hero {
       position: relative;
+      z-index: 10;
       border: 1px solid var(--line);
       border-radius: 20px;
       background: rgba(255, 255, 255, .88);
@@ -87,7 +91,7 @@
       position: absolute;
       right: 0;
       top: calc(100% + 6px);
-      z-index: 45;
+      z-index: 30;
       min-width: 190px;
       padding: 8px;
       gap: 7px;
@@ -126,7 +130,7 @@
     .search-shell {
       position: sticky;
       top: 0;
-      z-index: 35;
+      z-index: 10;
       margin: 8px -2px 10px;
       padding: 6px;
       border: 1px solid var(--line);
@@ -148,8 +152,8 @@
     }
     #searchInput:focus { border-color: #ff88b7; box-shadow: 0 0 0 3px rgba(255, 196, 220, .38); }
 
-    .panel { display: none; }
-    .panel.active { display: block; }
+    .section { display: none; }
+    .section.active { display: block; }
     .stack { display: grid; gap: 10px; }
     .section-title { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 12px 0 8px; }
     .card, .day-card, .photo-card, .expense-card, .contact-card {
@@ -257,7 +261,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 50;
+      z-index: 20;
       display: flex;
       gap: 7px;
       overflow-x: auto;
@@ -293,9 +297,8 @@
       position: fixed;
       right: 12px;
       bottom: calc(var(--bottom-nav-height) + 12px + env(safe-area-inset-bottom));
-      z-index: 55;
-      opacity: 0;
-      pointer-events: none;
+      z-index: 30;
+      display: none;
       min-height: 38px;
       padding: 8px 11px;
       border: 0;
@@ -306,7 +309,7 @@
       font-weight: 950;
       cursor: pointer;
     }
-    .back-to-top.show { opacity: 1; pointer-events: auto; }
+    .back-to-top.show { display: inline-flex; }
     .hidden-by-search { display: none !important; }
     .empty { display: none; text-align: center; margin: 12px 0; }
     .empty.show { display: block; }
@@ -337,8 +340,8 @@
       .search-shell, .bottom-nav, .tools, .back-to-top, .copy-btn, .empty { display: none !important; }
       .app { max-width: none; padding: 0; }
       .hero, .card, .day-card, .photo-card, .expense-card, .contact-card { box-shadow: none; background: white; break-inside: avoid; }
-      .panel { display: block !important; page-break-before: always; }
-      .panel:first-of-type { page-break-before: auto; }
+      .section { display: block !important; page-break-before: always; }
+      .section:first-of-type { page-break-before: auto; }
       details:not([open]) > div { display: block; }
     }
   </style>
@@ -375,8 +378,27 @@
       </div>
     </div>
 
-    <main id="content"></main>
+    <main id="content">
+      <section class="section active" data-section="overview" id="section-fallback">
+        <article class="card">
+          <h2>Next Important Tasks</h2>
+          <ul>
+            <li>Complete pre-arrival form.</li>
+            <li>Confirm internet backup, luggage storage, Mui Ne return car, and Train Street schedule.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h2>Today / Current Itinerary Preview</h2>
+          <p>June 11 — Saigon reset, shopping haul, BF haircut, food tour, and Saigon night photos.</p>
+        </article>
+        <article class="card" id="renderFallback">
+          <h2>Planner content failed to load. Please check the script.</h2>
+          <p>If JavaScript is unavailable, use saved booking screenshots and the visible emergency tasks above.</p>
+        </article>
+      </section>
+    </main>
     <p class="empty card" id="emptyState">No matching cards found. Try a city, date, hotel, activity, booking code, or contact.</p>
+    <noscript><p class="card"><strong>Planner content failed to load. Please check the script.</strong> JavaScript is disabled, so only the emergency fallback is shown.</p></noscript>
   </div>
 
   <nav class="bottom-nav" id="bottomNav" aria-label="Bottom navigation"></nav>
@@ -474,10 +496,10 @@
 
     const tabs = [
       ["overview", "🏠", "Home"],
-      ["itinerary", "🗓️", "Days"],
+      ["itinerary", "🗓️", "Full"],
       ["immigration", "🛂", "Immigration"],
       ["contacts", "☎️", "Contacts"],
-      ["photos", "📸", "Photos"],
+      ["photos", "📸", "Photo Guide"],
       ["expenses", "💸", "Costs"],
       ["checklists", "✅", "Lists"]
     ];
@@ -551,7 +573,7 @@
     }
 
     function renderOverview() {
-      return `<section class="panel active" id="panel-overview">
+      return `<section class="section active" data-section="overview" id="section-overview">
         <div class="dashboard-grid two-col">
           <article class="card compact-card searchable" data-search-label="Next Important Tasks pre arrival internet luggage Mui Ne Train Street">
             <h2>Next Important Tasks</h2>
@@ -564,6 +586,13 @@
             <button class="btn pink" type="button" data-go="itinerary" data-current-day="true">Open today card</button>
           </article>
         </div>
+        <div class="section-title"><h2>Quick Links</h2></div>
+        <div class="quick-actions" aria-label="Overview quick links">
+          <button class="btn" type="button" data-go="itinerary">Full Itinerary</button>
+          <button class="btn" type="button" data-go="immigration">Immigration</button>
+          <button class="btn" type="button" data-go="contacts">Contacts</button>
+          <button class="btn" type="button" data-go="expenses">Expenses</button>
+        </div>
         <div class="section-title"><h2>Trip Overview</h2></div>
         <div class="stack two-col">${trip.overview.map(([k, v]) => `<article class="card searchable"><h3>${esc(k)}</h3><p>${esc(v)}</p></article>`).join("")}</div>
         <details class="card accordion searchable"><summary class="acc-summary"><div class="summary-main"><h2>Flights</h2><span class="chev">⌄</span></div><div class="muted small">Tap for compact flight cards.</div></summary><div class="acc-body stack">${trip.flights.map(f => `<article class="card"><h3>${esc(f.item)}</h3><p><strong>${esc(f.date)}</strong></p><p>${esc(f.notes)}</p></article>`).join("")}</div></details>
@@ -573,26 +602,42 @@
 
     function renderPanel(id) {
       if (id === "overview") return renderOverview();
-      if (id === "itinerary") return `<section class="panel" id="panel-itinerary"><div class="section-title"><h2>Daily Itinerary</h2><span class="tag">Tap days</span></div><div class="stack">${trip.days.map((d, i) => dayCard(d, i, i === 1)).join("")}</div></section>`;
-      if (id === "immigration") return `<section class="panel" id="panel-immigration"><div class="section-title"><h2>Immigration Itinerary</h2></div><article class="card searchable"><p class="muted">Keep this short and consistent at the counter.</p>${checkList("immigration", trip.immigration)}</article></section>`;
-      if (id === "contacts") return `<section class="panel" id="panel-contacts"><div class="section-title"><h2>Contacts</h2><span class="tag">Tap-to-call</span></div><div class="stack two-col">${trip.contacts.map(contactCard).join("")}</div></section>`;
-      if (id === "photos") return `<section class="panel" id="panel-photos"><div class="section-title"><h2>Photo References + Pose Guide</h2><span class="tag">Collapsible</span></div><div class="stack">${trip.photoGuides.map(photoGuide).join("")}</div></section>`;
-      if (id === "expenses") return `<section class="panel" id="panel-expenses"><div class="section-title"><h2>Expenses</h2><span class="tag">Mobile cards</span></div>${table(["Item", "Category", "Status", "Notes"], trip.expenses.map(r => r.map(esc)))}<div class="mobile-cards desktop-hidden">${trip.expenses.map(expenseCard).join("")}</div></section>`;
-      if (id === "checklists") return `<section class="panel" id="panel-checklists"><div class="section-title"><h2>Checklists</h2></div><div class="stack two-col"><article class="card searchable"><h2>Daily Mini Bag</h2>${checkList("mini", trip.miniBag)}</article><article class="card searchable"><h2>Things To Finalize</h2>${checkList("final", trip.finalChecklist)}</article></div></section>`;
+      if (id === "itinerary") return `<section class="section" data-section="itinerary" id="section-itinerary"><div class="section-title"><h2>Daily Itinerary</h2><span class="tag">Tap days</span></div><div class="stack">${trip.days.map((d, i) => dayCard(d, i, i === 1)).join("")}</div></section>`;
+      if (id === "immigration") return `<section class="section" data-section="immigration" id="section-immigration"><div class="section-title"><h2>Immigration Itinerary</h2></div><article class="card searchable"><p class="muted">Keep this short and consistent at the counter.</p>${checkList("immigration", trip.immigration)}</article></section>`;
+      if (id === "contacts") return `<section class="section" data-section="contacts" id="section-contacts"><div class="section-title"><h2>Contacts</h2><span class="tag">Tap-to-call</span></div><div class="stack two-col">${trip.contacts.map(contactCard).join("")}</div></section>`;
+      if (id === "photos") return `<section class="section" data-section="photos" id="section-photos"><div class="section-title"><h2>Photo References + Pose Guide</h2><span class="tag">Collapsible</span></div><div class="stack">${trip.photoGuides.map(photoGuide).join("")}</div></section>`;
+      if (id === "expenses") return `<section class="section" data-section="expenses" id="section-expenses"><div class="section-title"><h2>Expenses</h2><span class="tag">Mobile cards</span></div>${table(["Item", "Category", "Status", "Notes"], trip.expenses.map(r => r.map(esc)))}<div class="mobile-cards desktop-hidden">${trip.expenses.map(expenseCard).join("")}</div></section>`;
+      if (id === "checklists") return `<section class="section" data-section="checklists" id="section-checklists"><div class="section-title"><h2>Checklists</h2></div><div class="stack two-col"><article class="card searchable"><h2>Daily Mini Bag</h2>${checkList("mini", trip.miniBag)}</article><article class="card searchable"><h2>Things To Finalize</h2>${checkList("final", trip.finalChecklist)}</article></div></section>`;
       return "";
     }
 
+    let activeSection = "overview";
+
     function render() {
-      document.getElementById("bottomNav").innerHTML = tabs.map(([id, icon, label], index) => `<button class="nav-btn" type="button" data-go="${id}" aria-selected="${index === 0}"><span class="icon">${icon}</span><span>${label}</span></button>`).join("");
-      document.getElementById("content").innerHTML = tabs.map(([id]) => renderPanel(id)).join("");
+      const bottomNav = document.getElementById("bottomNav");
+      const content = document.getElementById("content");
+      bottomNav.innerHTML = tabs.map(([id, icon, label], index) => `<button class="nav-btn" type="button" data-go="${id}" aria-selected="${index === 0}"><span class="icon">${icon}</span><span>${label}</span></button>`).join("");
+      content.innerHTML = tabs.map(([id]) => renderPanel(id)).join("");
       restoreChecks();
+      showSection("overview", false);
+    }
+
+    function showSection(sectionId, scroll = true) {
+      const id = tabs.some(([tabId]) => tabId === sectionId) ? sectionId : "overview";
+      activeSection = id;
+      document.querySelectorAll(".section").forEach(section => section.classList.toggle("active", section.dataset.section === id));
+      document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.go === id)));
+      document.getElementById("emptyState").classList.remove("show");
+      if (!document.getElementById("searchInput").value.trim()) clearSearchHiding();
+      if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function switchTab(id, scroll = true) {
-      document.querySelectorAll(".panel").forEach(panel => panel.classList.toggle("active", panel.id === `panel-${id}`));
-      document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.go === id)));
-      document.getElementById("emptyState").classList.remove("show");
-      if (scroll) window.scrollTo({ top: 0, behavior: "smooth" });
+      showSection(id, scroll);
+    }
+
+    function clearSearchHiding() {
+      document.querySelectorAll(".hidden-by-search").forEach(item => item.classList.remove("hidden-by-search"));
     }
 
     function currentTripDate() {
@@ -620,12 +665,13 @@
       let visible = 0;
       if (!query) {
         items.forEach(item => item.classList.remove("hidden-by-search"));
-        document.querySelectorAll(".panel").forEach(panel => panel.classList.toggle("active", panel.id === "panel-overview"));
-        document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.go === "overview")));
+        clearSearchHiding();
+        document.querySelectorAll(".section").forEach(section => section.classList.toggle("active", section.dataset.section === activeSection));
+        document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", String(btn.dataset.go === activeSection)));
         document.getElementById("emptyState").classList.remove("show");
         return;
       }
-      document.querySelectorAll(".panel").forEach(panel => panel.classList.add("active"));
+      document.querySelectorAll(".section").forEach(section => section.classList.add("active"));
       document.querySelectorAll(".nav-btn").forEach(btn => btn.setAttribute("aria-selected", "false"));
       items.forEach(item => {
         const haystack = `${item.textContent} ${item.dataset.searchLabel || ""}`.toLowerCase();
@@ -636,14 +682,32 @@
       document.getElementById("emptyState").classList.toggle("show", visible === 0);
     }
 
+
+    function getSaved(key) {
+      try { return window.localStorage.getItem(key); } catch (error) { console.warn("Checklist storage unavailable", error); return null; }
+    }
+
+    function setSaved(key, value) {
+      try { window.localStorage.setItem(key, value); } catch (error) { console.warn("Checklist storage unavailable", error); }
+    }
+
+    function removeSavedPrefix(prefix) {
+      try {
+        Object.keys(window.localStorage).filter(key => key.startsWith(prefix)).forEach(key => window.localStorage.removeItem(key));
+      } catch (error) {
+        console.warn("Checklist storage unavailable", error);
+      }
+    }
+
     function restoreChecks() {
       document.querySelectorAll("[data-check-id]").forEach(box => {
         const key = `vietnam2026:${box.dataset.checkId}`;
-        box.checked = localStorage.getItem(key) === "1";
-        box.closest(".check-item").classList.toggle("done", box.checked);
+        const item = box.closest(".check-item");
+        box.checked = getSaved(key) === "1";
+        if (item) item.classList.toggle("done", box.checked);
         box.addEventListener("change", () => {
-          localStorage.setItem(key, box.checked ? "1" : "0");
-          box.closest(".check-item").classList.toggle("done", box.checked);
+          setSaved(key, box.checked ? "1" : "0");
+          if (item) item.classList.toggle("done", box.checked);
         });
       });
     }
@@ -661,7 +725,13 @@
       }
     }
 
-    render();
+    try {
+      render();
+    } catch (error) {
+      console.error("Planner render failed", error);
+      const content = document.getElementById("content");
+      if (content) content.innerHTML = `<section class="section active" data-section="fallback"><article class="card"><h2>Planner content failed to load. Please check the script.</h2><p class="muted">The offline fallback is visible because rendering hit a script error.</p></article></section>`;
+    }
     document.addEventListener("click", event => {
       const go = event.target.closest("[data-go]");
       if (go) {
@@ -677,8 +747,8 @@
     document.getElementById("backToTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     document.getElementById("resetChecks").addEventListener("click", () => {
       if (confirm("Reset all saved checklist ticks?")) {
-        Object.keys(localStorage).filter(key => key.startsWith("vietnam2026:")).forEach(key => localStorage.removeItem(key));
-        document.querySelectorAll("[data-check-id]").forEach(box => { box.checked = false; box.closest(".check-item").classList.remove("done"); });
+        removeSavedPrefix("vietnam2026:");
+        document.querySelectorAll("[data-check-id]").forEach(box => { const item = box.closest(".check-item"); box.checked = false; if (item) item.classList.remove("done"); });
       }
     });
     window.addEventListener("scroll", () => document.getElementById("backToTop").classList.toggle("show", window.scrollY > 360));

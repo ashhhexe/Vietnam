@@ -17,123 +17,150 @@
       --sky: #cbe9ff;
       --lav: #ded2ff;
       --yellow: #fff0b8;
-      --card: rgba(255,255,255,.86);
-      --line: rgba(96, 69, 95, .14);
-      --shadow: 0 16px 38px rgba(112, 78, 106, .14);
-      --radius: 24px;
-      --radius-sm: 16px;
+      --card: rgba(255,255,255,.9);
+      --line: rgba(96, 69, 95, .16);
+      --shadow: 0 12px 26px rgba(112, 78, 106, .13);
+      --radius: 22px;
+      --radius-sm: 15px;
       --max: 1180px;
+      --bottom-nav-height: 82px;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       margin: 0;
       color: var(--ink);
-      font: 15px/1.55 ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system, sans-serif;
+      font: 16px/1.58 ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system, sans-serif;
       background:
-        radial-gradient(circle at 8% 0%, rgba(255,199,221,.55), transparent 27rem),
-        radial-gradient(circle at 96% 7%, rgba(203,233,255,.7), transparent 26rem),
-        radial-gradient(circle at 50% 105%, rgba(201,242,223,.65), transparent 28rem),
+        radial-gradient(circle at 8% 0%, rgba(255,199,221,.55), transparent 23rem),
+        radial-gradient(circle at 96% 7%, rgba(203,233,255,.72), transparent 24rem),
+        radial-gradient(circle at 50% 105%, rgba(201,242,223,.65), transparent 24rem),
         linear-gradient(135deg, var(--bg), var(--bg-2));
       min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px));
+      word-wrap: break-word;
     }
 
     button, input { font: inherit; }
-    .shell { max-width: var(--max); margin: 0 auto; padding: 22px; }
+    button { -webkit-tap-highlight-color: transparent; }
+    a { color: #8d3f69; overflow-wrap: anywhere; }
+    p, li, td, th, h1, h2, h3, span, div { overflow-wrap: anywhere; }
+    .shell { width: min(100%, var(--max)); margin: 0 auto; padding: 12px; }
     .hero {
       position: relative;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 34px;
-      padding: clamp(22px, 4vw, 42px);
-      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,231,240,.88));
+      border-radius: 28px;
+      padding: 22px 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,231,240,.9));
       box-shadow: var(--shadow);
     }
     .hero:after {
       content: "✈️ 🌸 🧳 📸 🍜";
       position: absolute;
-      right: clamp(12px, 3vw, 36px);
-      bottom: 12px;
-      font-size: clamp(30px, 7vw, 72px);
-      opacity: .18;
-      letter-spacing: .08em;
+      right: 12px;
+      bottom: 8px;
+      font-size: clamp(28px, 12vw, 64px);
+      opacity: .13;
+      letter-spacing: .04em;
       pointer-events: none;
     }
-    .eyebrow { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .eyebrow, .top-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .eyebrow { margin-bottom: 12px; }
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(255,255,255,.7);
+      background: rgba(255,255,255,.76);
       padding: 7px 11px;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
+      max-width: 100%;
     }
-    h1, h2, h3 { line-height: 1.15; margin: 0; }
-    h1 { max-width: 760px; font-size: clamp(32px, 7vw, 70px); letter-spacing: -.05em; }
-    .subtitle { max-width: 760px; margin: 16px 0 0; color: var(--muted); font-size: clamp(16px, 2vw, 20px); }
-    .top-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
-    .action-btn, .tab-btn {
+    h1, h2, h3 { line-height: 1.14; margin: 0; }
+    h1 { max-width: 760px; font-size: clamp(34px, 11vw, 70px); letter-spacing: -.05em; }
+    .subtitle { max-width: 760px; margin: 14px 0 0; color: var(--muted); font-size: clamp(16px, 4vw, 20px); }
+    .top-actions { margin-top: 20px; }
+    .action-btn, .tab-btn, .copy-btn, .back-to-top {
       border: 0;
       border-radius: 999px;
       cursor: pointer;
-      font-weight: 800;
+      font-weight: 900;
       color: var(--ink);
       transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      min-height: 44px;
     }
-    .action-btn { padding: 11px 16px; background: var(--ink); color: white; box-shadow: 0 10px 20px rgba(62,51,64,.17); }
+    .action-btn { padding: 11px 15px; background: var(--ink); color: white; box-shadow: 0 10px 20px rgba(62,51,64,.17); }
     .action-btn.secondary { background: white; color: var(--ink); border: 1px solid var(--line); }
-    .action-btn:hover, .tab-btn:hover { transform: translateY(-1px); }
+    .action-btn:hover, .tab-btn:hover, .copy-btn:hover, .back-to-top:hover { transform: translateY(-1px); }
 
     .toolbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      margin: 18px 0;
-      padding: 12px;
+      z-index: 30;
+      margin: 14px 0;
+      padding: 10px;
       border: 1px solid var(--line);
-      border-radius: 26px;
-      background: rgba(255,255,255,.82);
+      border-radius: 22px;
+      background: rgba(255,255,255,.9);
       box-shadow: 0 10px 26px rgba(112,78,106,.10);
       backdrop-filter: blur(12px);
     }
-    .search-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-bottom: 10px; }
+    .search-row { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .search-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
     #searchInput {
       width: 100%;
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 13px 17px;
+      padding: 14px 16px;
       background: white;
       outline: none;
+      font-size: 16px;
     }
     #searchInput:focus { border-color: #ff8fbd; box-shadow: 0 0 0 4px rgba(255,199,221,.45); }
-    .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
-    .tab-btn { flex: 0 0 auto; padding: 10px 14px; background: var(--pink-2); border: 1px solid transparent; }
+    .tabs {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+      background: rgba(255,255,255,.94);
+      border-top: 1px solid var(--line);
+      box-shadow: 0 -12px 30px rgba(112,78,106,.16);
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn { flex: 0 0 auto; padding: 11px 15px; background: var(--pink-2); border: 1px solid transparent; white-space: nowrap; }
     .tab-btn[aria-selected="true"] { background: linear-gradient(135deg, var(--pink), var(--lav)); border-color: rgba(62,51,64,.12); box-shadow: 0 8px 18px rgba(255,143,189,.25); }
 
     .tab-panel { display: none; animation: fade .22s ease; }
     .tab-panel.active { display: block; }
     @keyframes fade { from { opacity: .5; transform: translateY(4px);} to {opacity: 1; transform: none;} }
 
-    .grid { display: grid; gap: 16px; }
-    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .card, .day-card, .section-card {
+    .grid, .kpi { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .card, .day-card, .section-card, .expense-card, .photo-card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--card);
       box-shadow: var(--shadow);
-      padding: 18px;
+      padding: 15px;
+      min-width: 0;
     }
     .card h3, .section-card h2, .day-card h2 { margin-bottom: 10px; }
-    .section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 18px 0 12px; }
-    .section-title h2 { font-size: clamp(22px, 3vw, 34px); letter-spacing: -.03em; }
-    .kpi { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
-    .kpi .card { padding: 16px; background: linear-gradient(135deg, white, var(--pink-2)); }
+    .section-title { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin: 18px 0 12px; }
+    .section-title h2 { font-size: clamp(23px, 7vw, 34px); letter-spacing: -.03em; }
+    .kpi { margin: 16px 0; }
+    .kpi .card { padding: 15px; background: linear-gradient(135deg, white, var(--pink-2)); }
     .kpi strong { display: block; font-size: 22px; }
     .muted { color: var(--muted); }
     .small { font-size: 13px; }
@@ -143,13 +170,37 @@
     .tag.cash { background: var(--peach); }
     .tag.booked { background: var(--lav); }
 
+    details.day-card, details.photo-card { padding: 0; overflow: hidden; }
+    .day-summary, .photo-summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 15px;
+      display: grid;
+      gap: 8px;
+      min-height: 58px;
+    }
+    .day-summary::-webkit-details-marker, .photo-summary::-webkit-details-marker { display: none; }
+    .summary-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .chevron { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 999px; display: grid; place-items: center; background: var(--pink-2); font-weight: 900; }
+    details[open] .chevron { transform: rotate(180deg); }
+    .day-body, .photo-body { padding: 0 15px 15px; }
+    .photo-priority {
+      border: 1px dashed rgba(156,81,117,.35);
+      border-radius: 16px;
+      padding: 10px 12px;
+      background: rgba(255,240,184,.48);
+      font-weight: 800;
+    }
     .time-block {
       display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 12px;
-      padding: 11px 0;
+      grid-template-columns: 1fr;
+      gap: 3px;
+      padding: 12px 0 12px 16px;
+      border-left: 3px solid var(--pink);
       border-top: 1px dashed var(--line);
+      position: relative;
     }
+    .time-block:before { content: ""; position: absolute; left: -7px; top: 18px; width: 10px; height: 10px; border-radius: 999px; background: #ff8fbd; border: 2px solid white; }
     .time { font-weight: 900; color: #9c5175; }
     .reminder {
       margin-top: 14px;
@@ -164,45 +215,101 @@
       display: flex;
       gap: 10px;
       align-items: flex-start;
-      padding: 10px 12px;
+      padding: 11px 12px;
       border: 1px solid var(--line);
       border-radius: 15px;
-      background: rgba(255,255,255,.65);
+      background: rgba(255,255,255,.72);
+      min-height: 44px;
     }
-    .check-item input { width: 18px; height: 18px; margin-top: 2px; accent-color: #ff8fbd; }
+    .check-item input { width: 20px; height: 20px; margin-top: 2px; accent-color: #ff8fbd; flex: 0 0 auto; }
     .check-item.done span { color: var(--muted); text-decoration: line-through; }
 
-    .table-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--line); background: white; }
-    table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .table-wrap { display: none; overflow-x: auto; border-radius: 18px; border: 1px solid var(--line); background: white; }
+    table { width: 100%; border-collapse: collapse; min-width: 0; }
     th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
     th { background: var(--pink-2); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
     tr:last-child td { border-bottom: 0; }
-    .contact-line { display: grid; gap: 4px; }
+    .expense-cards { display: grid; gap: 12px; }
+    .expense-card { padding: 14px; }
+    .expense-meta { display: grid; gap: 7px; margin-top: 9px; }
+    .expense-meta div { display: grid; grid-template-columns: 88px 1fr; gap: 8px; }
+    .contact-line { display: grid; gap: 6px; }
+    .copy-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+    .copy-row:last-child { border-bottom: 0; }
+    .copy-text { min-width: 0; }
+    .copy-btn { flex: 0 0 auto; min-height: 36px; padding: 7px 10px; background: var(--sky); border: 1px solid var(--line); font-size: 12px; }
+    .phone-link { font-weight: 900; text-decoration: none; }
     .hidden-by-search { display: none !important; }
     .empty-state { display: none; margin: 22px 0; padding: 22px; text-align: center; border: 1px dashed var(--line); border-radius: var(--radius); background: rgba(255,255,255,.75); }
     .empty-state.show { display: block; }
+    .placeholder-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+    .reference-placeholder {
+      min-height: 96px;
+      border: 2px dashed rgba(156,81,117,.32);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,231,240,.56));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 900;
+      padding: 12px;
+    }
+    .photo-columns { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; }
+    .shot-checklist { margin-bottom: 16px; }
+    .back-to-top {
+      position: fixed;
+      right: 14px;
+      bottom: calc(var(--bottom-nav-height) + 14px + env(safe-area-inset-bottom, 0px));
+      z-index: 55;
+      padding: 10px 13px;
+      background: var(--ink);
+      color: white;
+      box-shadow: 0 10px 24px rgba(62,51,64,.24);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .back-to-top.show { opacity: 1; pointer-events: auto; }
 
-    @media (max-width: 820px) {
-      .shell { padding: 13px; }
-      .grid.two, .grid.three, .kpi { grid-template-columns: 1fr; }
-      .time-block { grid-template-columns: 1fr; gap: 2px; }
-      .search-row { grid-template-columns: 1fr; }
-      .toolbar { border-radius: 20px; }
-      .card, .day-card, .section-card { padding: 15px; }
+    @media (min-width: 700px) {
+      body { padding-bottom: 0; }
+      .shell { padding: 22px; }
+      .hero { border-radius: 34px; padding: clamp(22px, 4vw, 42px); }
+      .search-row { grid-template-columns: 1fr auto; align-items: center; }
+      .search-actions { display: flex; }
+      .tabs { position: static; padding: 10px 0 0; background: transparent; border-top: 0; box-shadow: none; scrollbar-width: thin; }
+      .tabs::-webkit-scrollbar { display: initial; }
+      .grid.two, .kpi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .photo-columns, .placeholder-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .time-block { grid-template-columns: 140px 1fr; padding-left: 18px; }
+      .table-wrap { display: block; }
+      .expense-cards { display: none; }
+      .back-to-top { bottom: 18px; }
+    }
+
+    @media (min-width: 980px) {
+      .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .kpi { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
 
     @media print {
-      body { background: white; color: #222; font-size: 11.5pt; }
+      body { background: white; color: #222; font-size: 11.5pt; padding-bottom: 0; }
       .shell { max-width: none; padding: 0; }
-      .toolbar, .top-actions, .empty-state { display: none !important; }
-      .hero, .card, .day-card, .section-card { box-shadow: none; break-inside: avoid; border-color: #ddd; background: white; }
+      .toolbar, .top-actions, .empty-state, .back-to-top, .copy-btn { display: none !important; }
+      .hero, .card, .day-card, .section-card, .expense-card, .photo-card { box-shadow: none; break-inside: avoid; border-color: #ddd; background: white; }
       .hero { padding: 18px; margin-bottom: 12px; }
       .hero:after { display: none; }
       .tab-panel { display: block !important; page-break-before: always; }
       .tab-panel:first-of-type { page-break-before: auto; }
+      details.day-card, details.photo-card { display: block; }
+      details.day-card > summary, details.photo-card > summary { display: block; }
+      details.day-card:not([open]) .day-body, details.photo-card:not([open]) .photo-body { display: block; }
       .section-title { margin-top: 12px; }
       .grid.two, .grid.three, .kpi { grid-template-columns: repeat(2, minmax(0,1fr)); }
       a { color: inherit; text-decoration: none; }
+      .table-wrap { display: block; }
+      .expense-cards { display: none; }
       table { min-width: 0; font-size: 9.5pt; }
       th, td { padding: 7px; }
     }
@@ -221,6 +328,7 @@
       <p class="subtitle">A fully offline travel planner dashboard for Kyla Nicole Rabi and James Benedict Santos, June 10–18, 2026: Ho Chi Minh City, Sapa, Hanoi, and Mui Ne.</p>
       <div class="top-actions">
         <button class="action-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <button class="action-btn secondary" id="currentDayHero">📍 Today / current day</button>
         <button class="action-btn secondary" id="resetChecks">↺ Reset saved checkboxes</button>
       </div>
     </header>
@@ -228,12 +336,16 @@
     <nav class="toolbar" aria-label="Planner navigation">
       <div class="search-row">
         <input id="searchInput" type="search" placeholder="🔎 Search all tabs: flight, hotel, outfit, cash, booking ID..." aria-label="Search all content" />
-        <button class="action-btn secondary" id="clearSearch">Clear</button>
+        <div class="search-actions">
+          <button class="action-btn secondary" id="currentDayBtn">📍 Today</button>
+          <button class="action-btn secondary" id="clearSearch">Clear</button>
+        </div>
       </div>
       <div class="tabs" id="tabs" role="tablist"></div>
     </nav>
 
     <main id="app"></main>
+    <button class="back-to-top" id="backToTop" type="button">↑ Top</button>
     <div class="empty-state" id="emptyState">No matching cards found. Try searching a city, date, booking code, or activity. 💗</div>
   </div>
 
@@ -298,23 +410,111 @@
         ["Felix Hotel", "Hotel", "—", "Paid", ""], ["Sapa CatCat Hills", "Hotel", "—", "Booked/Confirmed", ""], ["Royal Holiday Hanoi", "Hotel", "—", "Paid", "Booking ID 1726590471"], ["Anket De’ River", "Hotel", "₱6,882.17", "Paid", "Booking ID 1726593044"], ["G8 Bus", "Transfer", "₱2,332.10", "Paid", "KBP240013"], ["HK Bus", "Transfer", "—", "Booked", ""], ["Saigon food tour", "Activity", "—", "Booked", ""], ["4RAU Barber", "Activity", "—", "Booked", ""], ["Private car HCMC to Mui Ne", "Transfer", "Estimated 1.6M VND for 7-seater", "Cash on arrival", ""], ["Private car Mui Ne to SGN", "Transfer", "Estimated 1.6M VND for 7-seater", "Cash on arrival", ""], ["Mui Ne Jeep Tour", "Activity", "600k VND", "Cash on arrival", ""], ["White Sand Dunes ATV extra", "Activity", "Prepare 800k–1.2M VND", "Pay onsite", ""], ["Pocket Wi‑Fi/eSIM", "Connectivity", "—", "Not yet", ""], ["Saigon luggage storage", "Logistics", "—", "Not yet", ""], ["Ba Vi transport/photoshoot logistics", "Logistics", "—", "Not yet", ""], ["Camera rental before trip", "Gear", "—", "Not yet", ""], ["Shopping haul", "Shopping", "—", "Not yet", ""], ["Food cash buffer", "Food", "—", "Not yet", ""]
       ],
       finalize: ["Pocket Wi‑Fi + eSIM/local SIM", "Saigon luggage storage/delivery for shopping haul", "Jun 17 Mui Ne to SGN private car final confirmation", "Ba Vi transport with photographer/team", "Train Street schedule/café confirmation on Jun 15 morning", "Sapa Jun 14 weather-based route", "Cat Cat costume/rainbow slide/drone onsite", "Camera rental before travel date", "HR/immigration documents", "Vietnam Pre-Arrival Form QR", "Checklist to bring to follow"],
-      immigrationAnswer: "I am traveling to Vietnam for tourism and my birthday trip with my boyfriend. We will visit Ho Chi Minh City, Sapa, Hanoi, and Mui Ne. We have confirmed flights, hotels, local transfers, and a confirmed return flight to Manila on June 17, 2026."
+      immigrationAnswer: "I am traveling to Vietnam for tourism and my birthday trip with my boyfriend. We will visit Ho Chi Minh City, Sapa, Hanoi, and Mui Ne. We have confirmed flights, hotels, local transfers, and a confirmed return flight to Manila on June 17, 2026.",
+      photoPriorities: {
+        "June 11": "shopping haul, BF haircut, food tour, Saigon night",
+        "June 13": "Cat Cat costume, rainbow slide, village shots",
+        "June 14": "Sapa mountain shots, Green Valley/Rainbow Bridge, Moana/Glass Bridge if possible",
+        "June 15": "Ba Vi cinematic shoot, Train Street",
+        "June 16": "birthday resort, dunes, ATV/jeep sunset",
+        "June 17": "resort slow morning, Lotte Mart haul if time"
+      },
+      shotChecklist: ["Wide shot", "Portrait shot", "Couple shot", "Detail shot", "Video clip", "Walking shot", "Food/detail shot", "Outfit check", "Behind-the-scenes clip"],
+      photoGuides: [
+        {
+          title: "Saigon / Ho Chi Minh City Photo Guide",
+          photoIdeas: ["Airport fit check", "Shopping haul mirror videos", "Streetwear try-on clips", "People’s Committee Building elegant city shots", "Nguyen Hue Walking Street walking videos", "Saigon Opera House classy outfit photos", "Central Post Office exterior tourist shot", "Food tour helmet selfie", "Scooter POV video", "Street food closeups", "Flower market bouquet shot", "Night bridge/city lights shot"],
+          poseIdeas: ["walking away while looking back", "holding shopping bags", "mirror try-on with phone covering face", "candid laughing while eating", "helmet selfie with boyfriend", "crossing street city-style shot", "close-up food reaction shot"],
+          outfitNotes: "Cute airport fit, streetwear layers for shopping, and one classy neutral/elegant outfit for city landmarks and night lights.",
+          mustCapture: ["Airport fit check", "Shopping haul mirror video", "Helmet selfie with boyfriend", "Night bridge/city lights shot"],
+          optionalShots: ["Flower market bouquet shot", "Scooter POV video", "Central Post Office exterior tourist shot"]
+        },
+        {
+          title: "BF Haircut / Glow-Up Photo Guide",
+          photoIdeas: ["before haircut selfie", "barber chair photo", "after haircut close-up", "outfit check after haircut", "helmet selfie after food tour"],
+          poseIdeas: ["side profile to show cut", "hand through hair", "looking down casual shot", "mirror selfie together", "before-and-after collage placeholder"],
+          outfitNotes: "Keep a clean top ready after the haircut so the after-photo looks intentional and fresh.",
+          mustCapture: ["Before selfie", "After haircut close-up", "Side profile to show cut"],
+          optionalShots: ["Barber chair candid", "Mirror selfie together", "Before-and-after collage placeholder"]
+        },
+        {
+          title: "Sapa / Cat Cat Village Photo Guide",
+          photoIdeas: ["Hmong costume portraits", "stone pathway walking shot", "bridge/waterfall shot", "shawl twirl", "doorway/window portrait", "rainbow slide drone clip", "couple walking clips"],
+          poseIdeas: ["looking down while holding skirt", "walking uphill with back view", "sitting on steps", "holding hands while walking", "shawl flowing/twirl", "looking sideways with mountain background", "candid fixing costume/accessories"],
+          outfitNotes: "Wear comfortable shoes under the costume and keep hair/accessories secure for walking paths and twirl shots.",
+          mustCapture: ["Hmong costume portrait", "Stone pathway walking shot", "Rainbow slide clip", "Couple walking clip"],
+          optionalShots: ["Doorway/window portrait", "Candid fixing costume/accessories", "Bridge/waterfall shot"]
+        },
+        {
+          title: "Sapa Mountain / Fansipan / Moana / Glass Bridge / Green Valley Photo Guide",
+          photoIdeas: ["red Muong Hoa train window shot", "valley view shot", "cable car view", "summit stairs", "fog/cloud cinematic shot", "Alpine coaster/kart clip", "rainbow bridge shot", "Moana giant hands", "Bali gate", "swing shot", "glass bridge floor shot", "scarf/hair windy shot"],
+          poseIdeas: ["coat over shoulder", "looking into distance", "holding railing while looking sideways", "sitting on train seat by window", "walking on bridge shot from behind", "couple silhouette", "scarf flying shot", "dramatic mountain wide shot"],
+          outfitNotes: "Bring a warm layer, scarf, and wind-friendly hair plan; pastel or neutral coat will pop against fog and mountains.",
+          mustCapture: ["Train window shot", "Valley or summit wide shot", "Rainbow Bridge or Moana hands", "Scarf/hair windy shot"],
+          optionalShots: ["Glass bridge floor shot", "Alpine coaster/kart clip", "Bali gate or swing shot"]
+        },
+        {
+          title: "Hanoi / Ba Vi Photoshoot Guide",
+          photoIdeas: ["old church doorway dramatic shot", "pine forest walking-away shot", "sitting on stone/steps", "mossy wall portrait", "forest road walking shot", "long dress movement shot", "behind-the-scenes clips", "Train Street café shot", "egg coffee shot if Cafe Giang happens"],
+          poseIdeas: ["standing in church doorway", "walking away holding dress", "sitting sideways on steps", "looking down softly", "leaning on old wall", "couple walking through forest", "train café table shot", "holding coffee with train tracks background"],
+          outfitNotes: "Prioritize a long dress or flowy skirt for movement, plus comfy backup shoes for forest walking.",
+          mustCapture: ["Old church doorway dramatic shot", "Pine forest walking-away shot", "Long dress movement shot", "Train Street café shot"],
+          optionalShots: ["Egg coffee shot", "Behind-the-scenes clips", "Mossy wall portrait"]
+        },
+        {
+          title: "Mui Ne Birthday / Resort / Dunes Photo Guide",
+          photoIdeas: ["birthday outfit mirror shot", "pool view room shot", "brunch table birthday shot", "couple resort clips", "White Sand Dunes ATV action clip", "yellow jeep/truck photo", "dune ridge walking shot", "scarf flying shot", "sunglasses desert shot", "sunset silhouette", "birthday desert reel"],
+          poseIdeas: ["standing on dune ridge", "walking barefoot/with sandals on sand", "sitting on jeep", "leaning on jeep/truck", "sunglasses close-up", "scarf over shoulder", "looking back while walking", "couple walking in dunes", "birthday cake/dinner shot"],
+          outfitNotes: "Birthday outfit plus desert scarf/sunglasses; choose sand-friendly sandals and a look that moves well in wind.",
+          mustCapture: ["Birthday outfit mirror shot", "ATV or jeep action clip", "Sunset silhouette", "Birthday desert reel"],
+          optionalShots: ["Pool view room shot", "Brunch table birthday shot", "Sunglasses close-up"]
+        },
+        {
+          title: "Lotte Mart / Pasalubong Photo Guide",
+          photoIdeas: ["grocery haul flatlay", "coffee/snacks haul photo", "cart shot", "receipt/budget shot"],
+          poseIdeas: ["holding coffee packs", "cart POV", "pasalubong haul table layout"],
+          outfitNotes: "Casual comfy shopping outfit; keep haul items grouped by coffee, snacks, gifts, and budget/receipt.",
+          mustCapture: ["Coffee/snacks haul photo", "Cart POV", "Pasalubong haul table layout"],
+          optionalShots: ["Receipt/budget shot", "Holding coffee packs"]
+        }
+      ]
     };
 
     const tabs = [
-      ["overview", "🌸 Overview"], ["before", "✅ Before Flight Checklist"], ["itinerary", "🗓️ Full Detailed Itinerary"], ["immigration", "🛂 Immigration Itinerary"], ["booked", "🎟️ Booked / Confirmed"], ["contacts", "☎️ Contacts"], ["places", "👗 Places + Outfits"], ["expenses", "💸 Expenses"], ["minibag", "🎒 Daily Mini Bag"], ["finalize", "📌 Things To Finalize"]
+      ["overview", "🌸 Overview"], ["before", "✅ Before Flight Checklist"], ["itinerary", "🗓️ Full Detailed Itinerary"], ["immigration", "🛂 Immigration Itinerary"], ["booked", "🎟️ Booked / Confirmed"], ["contacts", "☎️ Contacts"], ["photos", "📸 Photo References + Pose Guide"], ["places", "👗 Places + Outfits"], ["expenses", "💸 Expenses"], ["minibag", "🎒 Daily Mini Bag"], ["finalize", "📌 Things To Finalize"]
     ];
 
     const app = document.getElementById("app");
     const escapeHtml = (s) => String(s ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
     const list = (items, cls = "clean") => `<ul class="${cls}">${items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
-    const details = (pairs) => pairs.filter(([,v]) => v).map(([k,v]) => `<p><strong>${escapeHtml(k)}:</strong> ${escapeHtml(v)}</p>`).join("");
     const checkboxList = (prefix, items) => `<div class="checklist">${items.map((item, i) => `<label class="check-item searchable" data-search-label="${escapeHtml(item)}"><input type="checkbox" data-check-id="${escapeHtml(prefix)}-${i}"><span>${escapeHtml(item)}</span></label>`).join("")}</div>`;
     const statusTag = (status) => {
       const s = status.toLowerCase();
       const cls = s.includes("paid") ? "paid" : s.includes("cash") ? "cash" : s.includes("not") || s.includes("onsite") ? "due" : "booked";
       return `<span class="tag ${cls}">${escapeHtml(status)}</span>`;
     };
+    const telHref = (value) => `tel:${String(value).replace(/[^+\d]/g, "")}`;
+    const isCopyField = (label) => /address|contact|whatsapp|zalo|viber|manager|pickup|drop-off|line id|booking|reference/i.test(label);
+    const detailRows = (pairs, copyable = false) => pairs.filter(([,v]) => v).map(([k,v]) => {
+      const safeValue = escapeHtml(v);
+      const valueHtml = /contact|whatsapp|zalo|viber|manager/i.test(k) && /^\+/.test(String(v).trim()) ? `<a class="phone-link" href="${telHref(v)}">${safeValue}</a>` : safeValue;
+      if (!copyable || !isCopyField(k)) return `<p><strong>${escapeHtml(k)}:</strong> ${valueHtml}</p>`;
+      return `<div class="copy-row"><div class="copy-text"><strong>${escapeHtml(k)}:</strong> ${valueHtml}</div><button class="copy-btn" type="button" data-copy="${safeValue}">Copy</button></div>`;
+    }).join("");
+    const details = (pairs) => detailRows(pairs, false);
+    const copyableDetails = (pairs) => detailRows(pairs, true);
+    const copyableList = (items) => `<ul class="clean">${items.map(item => {
+      const [maybeLabel, ...rest] = String(item).split(":");
+      const hasLabel = rest.length > 0;
+      const label = hasLabel ? maybeLabel : "Note";
+      const value = hasLabel ? rest.join(":").trim() : item;
+      const safe = escapeHtml(item);
+      const copyButton = isCopyField(label) ? ` <button class="copy-btn" type="button" data-copy="${escapeHtml(value)}">Copy</button>` : "";
+      return `<li>${safe}${copyButton}</li>`;
+    }).join("")}</ul>`;
+    const expenseCards = () => `<div class="expense-cards searchable">${trip.expenses.map(r => `<article class="expense-card searchable"><h3>${escapeHtml(r[0])}</h3><div>${statusTag(r[3])}</div><div class="expense-meta"><div><strong>Category</strong><span>${escapeHtml(r[1])}</span></div><div><strong>Cost</strong><span>${escapeHtml(r[2])}</span></div>${r[4] ? `<div><strong>Notes</strong><span>${escapeHtml(r[4])}</span></div>` : ""}</div></article>`).join("")}</div>`;
+    const placeholders = () => `<div class="placeholder-grid"><div class="reference-placeholder">[Add reference photo here]</div><div class="reference-placeholder">[Pose reference here]</div><div class="reference-placeholder">[Outfit reference here]</div></div>`;
+    const photoGuideCard = (guide, i) => `<details class="photo-card searchable" ${i === 0 ? "open" : ""}><summary class="photo-summary"><div class="summary-row"><h2>📸 ${escapeHtml(guide.title)}</h2><span class="chevron">⌄</span></div><p class="muted small">Tap to expand photo ideas, poses, outfits, and reference placeholders.</p></summary><div class="photo-body"><div class="photo-columns"><section><h3>Photo ideas</h3>${list(guide.photoIdeas)}</section><section><h3>Pose ideas</h3>${list(guide.poseIdeas)}</section><section><h3>Outfit notes</h3><p>${escapeHtml(guide.outfitNotes)}</p></section><section><h3>Must-capture shots</h3>${list(guide.mustCapture)}</section><section><h3>Optional shots if time allows</h3>${list(guide.optionalShots)}</section><section><h3>Reference image placeholders</h3>${placeholders()}</section></div></div></details>`;
 
     function render() {
       document.getElementById("tabs").innerHTML = tabs.map(([id, label], i) => `<button class="tab-btn" role="tab" id="tab-${id}" aria-controls="panel-${id}" aria-selected="${i === 0}" data-tab="${id}">${label}</button>`).join("");
@@ -326,14 +526,18 @@
       if (id === "overview") return `
         <div class="kpi searchable"><div class="card"><span class="muted">👥 Travelers</span><strong>${trip.travelers.length}</strong><p>${trip.travelers.join(" + ")}</p></div><div class="card"><span class="muted">📅 Dates</span><strong>${trip.dates}</strong><p>${trip.purpose}</p></div><div class="card"><span class="muted">📍 Cities</span><strong>4 stops</strong><p>${trip.cities}</p></div><div class="card"><span class="muted">💻 Private note</span><strong>Work shift</strong><p>${trip.workShift}</p></div></div>
         <div class="section-title"><h2>✈️ Flight Snapshot</h2></div><div class="grid two">${trip.flights.map(f => `<article class="card searchable"><h3>${f.airline} ${f.flight}</h3><p class="tag">${f.route}</p>${details([["Departure", f.depart], ["Arrival", f.arrive], ["Booking", f.booking], ["Baggage", f.baggage], ["Note", f.note]])}</article>`).join("")}</div>
-        <div class="section-title"><h2>🏨 Hotel Snapshot</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${details([["Address", h.address], ["Stay", h.stay], ["Check-in", h.checkin], ["Check-out", h.checkout], ["Breakfast", h.breakfast], ["Notes", h.notes]])}</article>`).join("")}</div>`;
+        <div class="section-title"><h2>🏨 Hotel Snapshot</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${copyableDetails([["Address", h.address], ["Stay", h.stay], ["Check-in", h.checkin], ["Check-out", h.checkout], ["Contact", h.contact], ["Breakfast", h.breakfast], ["Notes", h.notes]])}</article>`).join("")}</div>`;
       if (id === "before") return `<div class="section-title"><h2>✅ Preparation Checklist</h2><span class="pill">Saves offline in this browser</span></div><div class="grid">${trip.beforeFlight.map((d, i) => `<article class="section-card searchable"><h2>${d.date} — ${d.label}</h2>${checkboxList(`before-${i}`, d.items)}</article>`).join("")}</div>`;
-      if (id === "itinerary") return `<div class="section-title"><h2>🗓️ Full Detailed Itinerary</h2><span class="pill">Includes private work notes</span></div><div class="grid">${trip.itinerary.map((d, i) => `<article class="day-card searchable"><h2>${d.emoji} ${d.date} — ${d.city}</h2><p class="pill">🏨 Daily hotel routine: ${escapeHtml(d.hotel)}</p>${d.blocks.map(([time, text]) => `<div class="time-block"><div class="time">${escapeHtml(time)}</div><div>${escapeHtml(text)}</div></div>`).join("")}<div class="reminder"><h3>🌙 Final Reminder of the Day</h3>${checkboxList(`reminder-${i}`, trip.dailyReminder)}</div></article>`).join("")}</div>`;
-      if (id === "immigration") return `<article class="section-card searchable"><h2>🛂 Clean Immigration-Friendly Itinerary</h2><p class="pill">No workation details in this section</p>${details([["Purpose", trip.purpose], ["Travelers", trip.travelers.join(" and ")], ["Travel dates", trip.dates], ["Cities", "Ho Chi Minh City, Sapa, Hanoi, Mui Ne"]])}<h3>Short answer if asked</h3><p class="reminder">“${escapeHtml(trip.immigrationAnswer)}”</p></article><div class="section-title"><h2>✈️ Flights</h2></div><div class="grid two">${trip.flights.map(f => `<article class="card searchable"><h3>${f.airline} ${f.flight} — ${f.route}</h3>${details([["Departure", f.depart], ["Arrival", f.arrive], ["Booking", f.booking], ["Baggage", f.baggage]])}</article>`).join("")}</div><div class="section-title"><h2>🏨 Hotels + selected contacts</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${details([["Address", h.address], ["Stay", h.stay], ["Booking ID", h.booking], ["Hotel reference", h.reference], ["Contact", h.contact]])}</article>`).join("")}</div><div class="section-title"><h2>🎟️ Major booking references</h2></div><div class="grid two">${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${list(b.details.filter(x => /booking|reference|route|date|pickup|contact/i.test(x)))}</article>`).join("")}</div>`;
-      if (id === "booked") return `<div class="section-title"><h2>🎟️ Booked / Confirmed</h2></div><div class="grid two">${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${list(b.details)}</article>`).join("")}</div>`;
-      if (id === "contacts") return `<div class="section-title"><h2>☎️ Contacts + Booking Details</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>🏨 ${h.name}</h3><div class="contact-line">${details([["Address", h.address], ["Contact", h.contact], ["WhatsApp/Zalo/Viber", h.whatsapp], ["Manager", h.manager], ["Booking ID", h.booking], ["Hotel reference", h.reference], ["Confirmed notes", h.notes]])}</div></article>`).join("")}${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${list(b.details)}</article>`).join("")}</div>`;
+      if (id === "itinerary") return `<div class="section-title"><h2>🗓️ Full Detailed Itinerary</h2><span class="pill">Tap a day to expand</span></div><div class="grid">${trip.itinerary.map((d, i) => {
+        const priority = trip.photoPriorities[d.date];
+        return `<details class="day-card searchable" data-trip-date="${escapeHtml(d.date)}" ${i === 1 ? "open" : ""}><summary class="day-summary"><div class="summary-row"><h2>${d.emoji} ${d.date} — ${d.city}</h2><span class="chevron">⌄</span></div><p class="pill">🏨 ${escapeHtml(d.hotel)}</p>${priority ? `<p class="photo-priority">📸 Photo priorities today: ${escapeHtml(priority)}</p>` : ""}</summary><div class="day-body">${d.blocks.map(([time, text]) => `<div class="time-block"><div class="time">${escapeHtml(time)}</div><div>${escapeHtml(text)}</div></div>`).join("")}<div class="reminder"><h3>🌙 Final Reminder of the Day</h3>${checkboxList(`reminder-${i}`, trip.dailyReminder)}</div></div></details>`;
+      }).join("")}</div>`;
+      if (id === "immigration") return `<article class="section-card searchable"><h2>🛂 Clean Immigration-Friendly Itinerary</h2><p class="pill">No workation details in this section</p>${details([["Purpose", trip.purpose], ["Travelers", trip.travelers.join(" and ")], ["Travel dates", trip.dates], ["Cities", "Ho Chi Minh City, Sapa, Hanoi, Mui Ne"]])}<h3>Short answer if asked</h3><p class="reminder">“${escapeHtml(trip.immigrationAnswer)}”</p></article><div class="section-title"><h2>✈️ Flights</h2></div><div class="grid two">${trip.flights.map(f => `<article class="card searchable"><h3>${f.airline} ${f.flight} — ${f.route}</h3>${details([["Departure", f.depart], ["Arrival", f.arrive], ["Booking", f.booking], ["Baggage", f.baggage]])}</article>`).join("")}</div><div class="section-title"><h2>🏨 Hotels + selected transport</h2></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>${h.name}</h3>${copyableDetails([["Address", h.address], ["Stay", h.stay], ["Booking", h.booking], ["Reference", h.reference]])}</article>`).join("")}</div>`;
+      if (id === "booked") return `<div class="section-title"><h2>🎟️ Booked / Confirmed</h2></div><div class="grid two">${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${copyableList(b.details)}</article>`).join("")}</div>`;
+      if (id === "contacts") return `<div class="section-title"><h2>☎️ Contacts + Booking Details</h2><span class="pill">Tap numbers to call • Copy addresses/contact details</span></div><div class="grid two">${trip.hotels.map(h => `<article class="card searchable"><h3>🏨 ${h.name}</h3><div class="contact-line">${copyableDetails([["Address", h.address], ["Contact", h.contact], ["WhatsApp/Zalo/Viber", h.whatsapp], ["Manager", h.manager], ["Booking ID", h.booking], ["Hotel reference", h.reference], ["Confirmed notes", h.notes]])}</div></article>`).join("")}${trip.bookings.map(b => `<article class="card searchable"><h3>${b.icon} ${b.name}</h3>${copyableList(b.details)}</article>`).join("")}</div>`;
+      if (id === "photos") return `<div class="section-title"><h2>📸 Photo References + Pose Guide</h2><span class="pill">Editable placeholders + saved shot checklist</span></div><article class="section-card searchable shot-checklist"><h2>✅ Shot Checklist</h2><p class="muted">These checkboxes save offline in this browser with localStorage.</p>${checkboxList("shot-checklist", trip.shotChecklist)}</article><div class="grid">${trip.photoGuides.map(photoGuideCard).join("")}</div>`;
       if (id === "places") return `<div class="grid two"><article class="section-card searchable"><h2>👗 Style Preference</h2><p>${escapeHtml(trip.shopping.style)}</p><h3>Outfit packing list</h3>${checkboxList("outfits", trip.shopping.outfits)}</article><article class="section-card searchable"><h2>🛍️ Shopping Clusters</h2>${list(trip.shopping.clusters)}<h3>Photo/place notes</h3>${list(["Cat Cat Village: costume rental, village walk, waterfall/bridge shots, rainbow slide, drone/rainbow slide if available", "Sapa route: Green Valley / Alpine Coaster / Rainbow Bridge; clear-day Fansipan option; foggy-day Glass Bridge/Heaven Gate option", "Ba Vi: Old Church Ruins, Pine Forest, mossy walls, forest road", "Train Street: preferred Train Street Coffee 69; backups Hanoi Train Track Café, Nam Vy Coffee, Coffee 90 Train Street", "Mui Ne dunes: White Sand Dunes, ATV, yellow truck/photo road, Red Sand Dunes, beach road, Fishing Village if time allows"])} </article></div>`;
-      if (id === "expenses") return `<div class="section-title"><h2>💸 Expense Tracker</h2><span class="pill">Paid / Not Yet / Cash On Arrival</span></div><div class="table-wrap searchable"><table><thead><tr><th>Item</th><th>Category</th><th>Estimated/Actual Cost</th><th>Paid Status</th><th>Notes</th></tr></thead><tbody>${trip.expenses.map(r => `<tr><td>${escapeHtml(r[0])}</td><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td><td>${statusTag(r[3])}</td><td>${escapeHtml(r[4])}</td></tr>`).join("")}</tbody></table></div>`;
+      if (id === "expenses") return `<div class="section-title"><h2>💸 Expense Tracker</h2><span class="pill">Cards on phone • Table for desktop/print</span></div>${expenseCards()}<div class="table-wrap searchable"><table><thead><tr><th>Item</th><th>Category</th><th>Estimated/Actual Cost</th><th>Paid Status</th><th>Notes</th></tr></thead><tbody>${trip.expenses.map(r => `<tr><td>${escapeHtml(r[0])}</td><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td><td>${statusTag(r[3])}</td><td>${escapeHtml(r[4])}</td></tr>`).join("")}</tbody></table></div>`;
       if (id === "minibag") return `<div class="grid two"><article class="section-card searchable"><h2>🎒 Base Mini Bag Items</h2>${checkboxList("mini-base", trip.miniBagBase)}</article><article class="section-card searchable"><h2>💡 Mini Bag Rule</h2><p>Pack base items first, then add the day-specific card items. Screenshot vouchers and addresses before leaving Wi‑Fi.</p></article></div><div class="section-title"><h2>Day-specific Mini Bags</h2></div><div class="grid two">${trip.miniBagDays.map((d, i) => `<article class="card searchable"><h3>${d.day} — ${d.label}</h3>${checkboxList(`mini-day-${i}`, d.items)}</article>`).join("")}</div>`;
       if (id === "finalize") return `<div class="section-title"><h2>📌 Things To Finalize</h2><span class="pill">Last-mile confirmations</span></div><article class="section-card searchable">${checkboxList("finalize", trip.finalize)}</article>`;
       return "";
@@ -377,10 +581,61 @@
       document.getElementById("emptyState").classList.toggle("show", visible === 0);
     }
 
+    function currentTripDayLabel() {
+      const today = new Date();
+      const year = today.getFullYear();
+      if (year !== 2026) return "June 11";
+      const month = today.getMonth();
+      const date = today.getDate();
+      if (month === 5 && date >= 10 && date <= 17) return `June ${date}`;
+      return "June 11";
+    }
+
+    function goToCurrentDay() {
+      document.getElementById("searchInput").value = "";
+      applySearch();
+      switchTab("itinerary");
+      requestAnimationFrame(() => {
+        const label = currentTripDayLabel();
+        const target = [...document.querySelectorAll("[data-trip-date]")].find(el => el.dataset.tripDate === label) || document.querySelector("[data-trip-date='June 11']");
+        if (target) {
+          target.open = true;
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    async function copyText(value, button) {
+      try {
+        await navigator.clipboard.writeText(value);
+        const old = button.textContent;
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = old, 1200);
+      } catch {
+        const old = button.textContent;
+        button.textContent = "Copy failed";
+        setTimeout(() => button.textContent = old, 1200);
+      }
+    }
+
     render();
     document.getElementById("tabs").addEventListener("click", e => { const btn = e.target.closest(".tab-btn"); if (btn) { document.getElementById("searchInput").value = ""; applySearch(); switchTab(btn.dataset.tab); } });
     document.getElementById("searchInput").addEventListener("input", applySearch);
     document.getElementById("clearSearch").addEventListener("click", () => { document.getElementById("searchInput").value = ""; applySearch(); switchTab("overview"); });
+    document.getElementById("currentDayBtn").addEventListener("click", goToCurrentDay);
+    document.getElementById("currentDayHero").addEventListener("click", goToCurrentDay);
+    document.getElementById("backToTop").addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.addEventListener("click", e => { const btn = e.target.closest("[data-copy]"); if (btn) copyText(btn.dataset.copy, btn); });
+    window.addEventListener("scroll", () => document.getElementById("backToTop").classList.toggle("show", window.scrollY > 500));
+    let printOpenedDetails = [];
+    window.addEventListener("beforeprint", () => {
+      printOpenedDetails = [...document.querySelectorAll("details:not([open])")];
+      printOpenedDetails.forEach(detail => detail.open = true);
+    });
+    window.addEventListener("afterprint", () => {
+      printOpenedDetails.forEach(detail => detail.open = false);
+      printOpenedDetails = [];
+    });
     document.getElementById("resetChecks").addEventListener("click", () => { if (confirm("Reset all saved checklist ticks for this planner?")) { Object.keys(localStorage).filter(k => k.startsWith("vietnam2026:")).forEach(k => localStorage.removeItem(k)); document.querySelectorAll("[data-check-id]").forEach(box => { box.checked = false; box.closest(".check-item").classList.remove("done"); }); } });
   </script>
 </body>
